@@ -1,4 +1,4 @@
-# Lockline
+# Stakeout
 
 Online escape rooms for multiple screens. A static site with no build step and no server, hosted on GitHub Pages.
 

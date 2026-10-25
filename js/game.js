@@ -1,11 +1,11 @@
-// Lockline game engine. Room content lives in js/rooms/<room>.js and registers window.LOCKLINE_ROOM.
+// Stakeout game engine. Room content lives in js/rooms/<room>.js and registers window.LOCKLINE_ROOM.
 // Progress is saved per device in localStorage; the two sides never need to sync because every
 // puzzle's answer sits on one screen and the information to solve it sits on the other.
 (() => {
   const room = window.LOCKLINE_ROOM;
   const cfg = window.LOCKLINE;
   const $ = s => document.querySelector(s);
-  const STORE = "lockline:" + room.id;
+  const STORE = "stakeout:" + room.id;
 
   // ---------- state ----------
   const blank = () => ({ key: "", instanceId: "", role: "", startedAt: 0, finishedAt: 0, solved: {}, hints: {}, seen: {}, done: {}, penalty: 0, notes: "" });
@@ -24,6 +24,7 @@
     return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
   }
   async function check(id, value) {
+    // "lockline" is the site's old name; it stays in the salt so the stored answer hashes keep matching.
     const digest = await sha(`lockline|${room.id}|${id}|${norm(value)}`);
     return (room.answers[id] || []).includes(digest);
   }
@@ -59,7 +60,7 @@
   // 1. key
   function showKey() {
     const banner = $("#preview-banner");
-    banner.hidden = !LocklineLicense.isPreview(room.id);
+    banner.hidden = !StakeoutLicense.isPreview(room.id);
     const params = new URLSearchParams(location.search);
     if (params.get("key")) $("#key-input").value = params.get("key");
     show("s-key");
@@ -70,7 +71,7 @@
     const key = input.value.trim();
     if (!key) { input.setAttribute("aria-invalid", "true"); msg.className = "field-msg bad"; msg.textContent = "Paste your key first."; return; }
     btn.disabled = true; btn.classList.add("busy"); msg.className = "field-msg"; msg.textContent = "Checking…";
-    const res = await LocklineLicense.verify(room.id, key, state);
+    const res = await StakeoutLicense.verify(room.id, key, state);
     btn.disabled = false; btn.classList.remove("busy");
     if (!res.ok) { input.setAttribute("aria-invalid", "true"); msg.className = "field-msg bad"; msg.textContent = res.message; return; }
     input.removeAttribute("aria-invalid");
@@ -291,11 +292,11 @@
       <p class="muted">Tell the other team, if they haven't filed it yet. They can enter the same answer on their screen to see this report.</p>
       <div class="end-actions">
         <button class="btn btn--tape" id="share-btn">Share your result</button>
-        <a class="btn btn--ghost" href="./">Back to Lockline</a>
+        <a class="btn btn--ghost" href="./">Back to Stakeout</a>
       </div>
     </div>`));
     $("#share-btn").addEventListener("click", async () => {
-      const text = `We cracked Lockline Case 01: ${room.title} in ${mmss(sec)} with ${hints} hint${hints === 1 ? "" : "s"}. Rank: ${rank}. 🔍 ${location.origin}${location.pathname.replace(/play\.html$/, "")}`;
+      const text = `We cracked Stakeout Case 01: ${room.title} in ${mmss(sec)} with ${hints} hint${hints === 1 ? "" : "s"}. Rank: ${rank}. 🔍 ${location.origin}${location.pathname.replace(/play\.html$/, "")}`;
       try {
         if (navigator.share) await navigator.share({ text });
         else { await navigator.clipboard.writeText(text); toast("Result copied. Paste it anywhere."); }

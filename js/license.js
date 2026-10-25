@@ -1,6 +1,6 @@
 // License keys via the Lemon Squeezy License API. It allows browser requests (CORS *) and needs no secret,
 // so the site can stay static. Each device uses one activation; set the product's activation limit to 6.
-window.LocklineLicense = (() => {
+window.StakeoutLicense = (() => {
   const API = "https://api.lemonsqueezy.com/v1/licenses/";
   const cfg = window.LOCKLINE;
 
@@ -38,7 +38,7 @@ window.LocklineLicense = (() => {
         const v = await call("validate", { license_key: key, instance_id: saved.instanceId });
         if (v.valid && owns(v)) return { ok: true, instanceId: saved.instanceId };
       }
-      const a = await call("activate", { license_key: key, instance_name: "lockline-" + roomId + "-" + Math.random().toString(36).slice(2, 8) });
+      const a = await call("activate", { license_key: key, instance_name: "stakeout-" + roomId + "-" + Math.random().toString(36).slice(2, 8) });
       if (a.activated && owns(a)) return { ok: true, instanceId: a.instance.id };
       if (a.activated && !owns(a)) return { ok: false, message: "That key is for a different case." };
       return { ok: false, message: friendly(a.error) };
