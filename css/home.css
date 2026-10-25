@@ -1,12 +1,12 @@
 /* ---------- hero ---------- */
-/* Photo of a locked box and puzzle props on navy; the props sit on the right, the empty left holds the text. */
-.hero { position: relative; overflow: hidden; background: var(--night); color: #fff; padding: 0; height: min(84vh, 720px); min-height: 520px; display: grid; align-items: center; }
-.hero-img { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: none; }
-.hero::before { /* keeps the headline readable where the photo runs under it on mid-size screens */
+/* Full-screen photo (locked box and puzzle props on navy, props on the right) with the words over its empty left side. */
+.hero { position: relative; overflow: hidden; background: var(--night); color: #fff; padding: 0; height: calc(100svh - 68px); min-height: 540px; display: grid; align-items: center; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right top; }
+.hero::before { /* keeps the words readable where the photo runs under them */
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(90deg, var(--night) 0, var(--night) 28%, #111e2b00 52%);
+  background: linear-gradient(90deg, #111e2bf2 0, #111e2bcc 30%, #111e2b00 58%);
 }
-.hero .wrap { position: relative; z-index: 2; padding: clamp(64px, 9vw, 120px) 0; }
+.hero .wrap { position: relative; z-index: 2; }
 .hero-copy { max-width: 620px; }
 .hero .eyebrow { color: var(--brass); }
 .kinetic { display: flex; flex-direction: column; gap: .04em; margin-bottom: 32px; font-size: clamp(2.4rem, 4.6vw, 4.1rem); }
@@ -20,12 +20,12 @@
 .hero .btn--tape { --bg: var(--brass); --fg: var(--night); border-color: var(--brass); }
 .hero .btn:hover { box-shadow: 0 6px 0 -1px #0008; }
 .btn--light { --fg: #fff; border-color: #ffffffb3; }
-/* phones: text on top, props underneath */
+/* phones: still full screen; words at the top, props showing below them */
 @media (max-width: 820px) {
-  .hero { height: auto; min-height: 0; align-items: start; }
+  .hero { align-items: start; }
+  .hero-img { inset: auto -20% 0 auto; width: 185%; max-width: none; height: auto; object-fit: initial; -webkit-mask-image: linear-gradient(transparent, #000 18%); mask-image: linear-gradient(transparent, #000 18%); }
   .hero::before { display: none; }
-  .hero-img { top: auto; bottom: 0; height: auto; width: 175%; right: -8%; }
-  .hero .wrap { padding: 48px 0 calc(175vw * 941 / 1672 * .98); }
+  .hero .wrap { padding-top: 40px; }
 }
 
 /* ---------- how ---------- */
