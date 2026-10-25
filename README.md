@@ -1,6 +1,6 @@
 # Lockline
 
-Online escape rooms for two screens. A static site with no build step and no server, hosted on GitHub Pages.
+Online escape rooms for multiple screens. A static site with no build step and no server, hosted on GitHub Pages.
 
 - `index.html`: home page
 - `rooms/the-last-call.html`: Case 01 sales page
