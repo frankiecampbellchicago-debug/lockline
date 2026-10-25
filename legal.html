@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms &amp; Privacy · Lockline</title>
+<meta name="description" content="Lockline terms of sale, privacy policy and refund policy.">
+<meta name="theme-color" content="#f6f5f0">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Courier+Prime:wght@400;700&family=Inter:wght@400..700&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<style>
+  .legal { max-width: 720px; padding: clamp(40px, 7vw, 80px) 0; }
+  .legal h2 { font-size: 1.8rem; margin-top: 2.2em; scroll-margin-top: 90px; }
+  .legal p, .legal li { color: var(--ink-2); }
+  .legal .updated { font: 700 .85rem var(--f-type); color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="./" aria-label="Lockline home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="9" fill="#1c1e21"/><circle cx="16" cy="13" r="4.6" fill="#f2c230"/><path d="M13.2 15.5h5.6l1.6 9h-8.8z" fill="#f2c230"/></svg>
+      lockline
+    </a>
+    <a class="btn btn--tape" href="play.html">Play <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main id="main" class="wrap legal">
+  <p class="updated">Last updated October 25, 2026</p>
+  <h1>Terms &amp; privacy</h1>
+  <p>The short version: you buy a key, your group plays the case, we don't track you, and if it doesn't work for you we'll refund you.</p>
+
+  <h2 id="terms">Terms of sale</h2>
+  <ul>
+    <li>Each purchase gets you one license key for one case. A key works on up to 6 devices, for one group of friends, family or a couple. Please don't post keys publicly.</li>
+    <li>Payments are processed by Lemon Squeezy, our reseller and merchant of record. They handle your card details and sales tax. We never see your card number.</li>
+    <li>Your key doesn't expire. We'll keep each case online for as long as Lockline is running.</li>
+    <li>Cases are fiction. Any resemblance to real people or businesses is coincidental.</li>
+  </ul>
+
+  <h2 id="privacy">Privacy</h2>
+  <ul>
+    <li><strong>No accounts, no tracking.</strong> The site doesn't use analytics, ad trackers or cookies.</li>
+    <li><strong>Your progress stays on your device.</strong> Game progress, notes and your key are saved in your browser's local storage. Clearing your browser data clears them.</li>
+    <li><strong>Checking your key.</strong> When you enter your key, your browser sends it to Lemon Squeezy to confirm it's valid and register the device. See <a href="https://www.lemonsqueezy.com/privacy">Lemon Squeezy's privacy policy</a>.</li>
+    <li><strong>Purchases.</strong> Lemon Squeezy collects your email and billing details to process the sale and send your key. We can see your email and order so we can help with support.</li>
+    <li><strong>Fonts.</strong> Pages load fonts from Google Fonts, which receives your IP address.</li>
+  </ul>
+
+  <h2 id="refunds">Refunds</h2>
+  <p>If the game doesn't work on your devices, or you're unhappy for any reason, email us within <strong>14 days</strong> of purchase and we'll refund you in full. No interrogation required.</p>
+
+  <h2 id="contact">Contact</h2>
+  <p id="contact-line">Questions or problems? Reply to your purchase receipt email and it will reach us.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="./"><svg viewBox="0 0 32 32" aria-hidden="true" width="30" height="30"><rect x="1" y="1" width="30" height="30" rx="9" fill="#f2c230"/><circle cx="16" cy="13" r="4.6" fill="#1c1e21"/><path d="M13.2 15.5h5.6l1.6 9h-8.8z" fill="#1c1e21"/></svg>lockline</a>
+      <small>© <span data-year></span> Lockline</small>
+    </div>
+    <div><h4>Play</h4><ul><li><a href="rooms/the-last-call.html">Case 01: The Last Call</a></li><li><a href="play.html">Enter a key</a></li></ul></div>
+    <div><h4>Info</h4><ul><li><a href="./#faq">FAQ</a></li><li><a href="#refunds">Refunds</a></li></ul></div>
+  </div>
+</footer>
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+<script>
+  if (LOCKLINE.supportEmail) document.getElementById("contact-line").innerHTML = `Questions or problems? Email <a href="mailto:${LOCKLINE.supportEmail}">${LOCKLINE.supportEmail}</a>.`;
+</script>
+</body>
+</html>

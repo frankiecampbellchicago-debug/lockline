@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lockline · Online escape rooms for two screens</title>
+<meta name="description" content="Online detective escape rooms you play from anywhere. Split into Field and HQ, each on your own screen, and talk it through. 2–6 players, $10 per room.">
+<meta property="og:title" content="Lockline · Online escape rooms">
+<meta property="og:description" content="Two screens. One line. Crack the case. 2–6 players, $10 per room.">
+<meta name="theme-color" content="#f6f5f0">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Courier+Prime:wght@400;700&family=Inter:wght@400..700&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="./" aria-label="Lockline home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="9" fill="#1c1e21"/><circle cx="16" cy="13" r="4.6" fill="#f2c230"/><path d="M13.2 15.5h5.6l1.6 9h-8.8z" fill="#f2c230"/></svg>
+      lockline
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#cases">Cases</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--tape" href="play.html">Play <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Online escape rooms · 2–6 players</span>
+        <h1 class="kinetic" aria-label="Two screens. One line. Crack the case.">
+          <span class="k" aria-hidden="true">Two screens.</span>
+          <span class="k" aria-hidden="true">One line.</span>
+          <span class="k k--tape" aria-hidden="true">Crack the case.</span>
+        </h1>
+        <p class="lede">Split into <strong>Field</strong> and <strong>HQ</strong>. Each team gets its own screen and half the clues. Get on a call and talk it through. Neither side can solve it alone.</p>
+        <div class="hero-cta">
+          <a class="btn btn--tape" href="rooms/the-last-call.html">Open Case 01 · $10 <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="#how">How it works</a>
+        </div>
+        <ul class="hero-facts" aria-label="Quick facts">
+          <li>Plays in your browser</li>
+          <li>Works on any video or phone call</li>
+          <li>No downloads, no account</li>
+        </ul>
+      </div>
+
+      <!-- Mini lock: a 20-second taste of the format -->
+      <div class="teaser paper" aria-labelledby="teaser-title">
+        <div class="teaser-tag typed">Evidence 01-A</div>
+        <h2 id="teaser-title" class="teaser-title">Try it: one clue, one lock</h2>
+        <div class="teaser-body">
+          <figure class="clock" aria-describedby="clock-cap">
+            <svg viewBox="0 0 120 120" role="img" aria-label="A smashed wall clock. The hour hand sits between 1 and 2; the minute hand points at the 8.">
+              <circle cx="60" cy="60" r="54" fill="#fff" stroke="#1c1e21" stroke-width="5"/>
+              <g stroke="#1c1e21" stroke-width="3" stroke-linecap="round">
+                <line x1="60" y1="12" x2="60" y2="20"/><line x1="108" y1="60" x2="100" y2="60"/><line x1="60" y1="108" x2="60" y2="100"/><line x1="12" y1="60" x2="20" y2="60"/>
+              </g>
+              <g fill="#1c1e21" font-family="Courier Prime, monospace" font-size="11" font-weight="700" text-anchor="middle">
+                <text x="60" y="33">12</text><text x="88" y="64">3</text><text x="60" y="94">6</text><text x="32" y="64">9</text>
+              </g>
+              <line x1="60" y1="60" x2="77" y2="46" stroke="#1c1e21" stroke-width="5" stroke-linecap="round"/>
+              <line x1="60" y1="60" x2="30" y2="77" stroke="#1c1e21" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="60" cy="60" r="4" fill="#1c1e21"/>
+              <path d="M70 18 L64 40 L80 46 L72 70 M64 40 L48 34 M80 46 L98 42" fill="none" stroke="#1c1e21" stroke-width="1.4" opacity=".55"/>
+            </svg>
+            <figcaption id="clock-cap" class="typed">Found smashed on the office floor.</figcaption>
+          </figure>
+          <form class="minilock" id="minilock" novalidate>
+            <label for="ml-code" class="typed">What time did the clock stop? <span class="mute">(3 digits)</span></label>
+            <div class="ml-row">
+              <input id="ml-code" inputmode="numeric" autocomplete="off" maxlength="3" pattern="[0-9]{3}" placeholder="• • •" aria-describedby="ml-msg">
+              <button class="btn" type="submit">Unlock</button>
+            </div>
+            <p id="ml-msg" class="ml-msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="teaser-solved" hidden>
+          <span class="stamp">Unlocked</span>
+          <p><strong>Nice work, detective.</strong> In a real case, your partner would be looking at the clock while you hold the lock. That's Lockline.</p>
+          <a class="btn btn--tape" href="rooms/the-last-call.html">See Case 01 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tape-strip" aria-hidden="true">
+    <div class="track">
+      <span>Police line · do not cross</span><span>Case 01 · The Last Call</span><span>Field + HQ</span><span>$10 per room</span><span>Police line · do not cross</span><span>Case 01 · The Last Call</span><span>Field + HQ</span><span>$10 per room</span>
+      <span>Police line · do not cross</span><span>Case 01 · The Last Call</span><span>Field + HQ</span><span>$10 per room</span><span>Police line · do not cross</span><span>Case 01 · The Last Call</span><span>Field + HQ</span><span>$10 per room</span>
+    </div>
+  </div>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>Same case. Different evidence.</h2>
+        <p>Most online escape rooms put everyone in front of one shared screen. Lockline gives each team its own screen, so you have to describe what you see. That's where the fun is.</p>
+      </div>
+      <ol class="steps">
+        <li class="step paper reveal">
+          <span class="step-n typed">01</span>
+          <h3>Get your key</h3>
+          <p>Buy a case for $10. Your case key arrives by email in seconds, and one key covers your whole group.</p>
+        </li>
+        <li class="step paper reveal">
+          <span class="step-n typed">02</span>
+          <h3>Pick a side</h3>
+          <p>One team takes <strong>Field</strong> and works the crime scene. The other takes <strong>HQ</strong> and digs through precinct records. Each team opens <a href="play.html">lockline/play</a> on its own device.</p>
+        </li>
+        <li class="step paper reveal">
+          <span class="step-n typed">03</span>
+          <h3>Talk it through</h3>
+          <p>Hop on any call: FaceTime, Zoom, Discord or a plain phone call. Read clues out loud, compare notes and name the culprit before dawn.</p>
+        </li>
+      </ol>
+      <div class="split reveal">
+        <div class="split-side">
+          <span class="chip">Field team sees</span>
+          <ul>
+            <li>The crime scene, room by room</li>
+            <li>Locks, safes and hidden objects</li>
+            <li>Physical evidence</li>
+          </ul>
+        </div>
+        <div class="split-mid" aria-hidden="true">
+          <svg viewBox="0 0 80 40"><path d="M2 20h18l6-12 8 24 8-24 8 24 6-12h22" fill="none" stroke="#1c1e21" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="split-side">
+          <span class="chip">HQ team sees</span>
+          <ul>
+            <li>Suspect files and alibis</li>
+            <li>The city directory and phone lines</li>
+            <li>Records the Field team needs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cases" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Cases</span>
+        <h2>Open a case.</h2>
+        <p>Each case is a standalone story. Play in any order.</p>
+      </div>
+      <div class="cases">
+        <article class="case-card reveal">
+          <a class="case-link" href="rooms/the-last-call.html" aria-label="Case 01, The Last Call: see details"></a>
+          <div class="case-art" aria-hidden="true">
+            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="240" fill="#1c1e21"/>
+              <g fill="#2b2e33"><rect x="0" y="120" width="60" height="120"/><rect x="50" y="80" width="50" height="160"/><rect x="95" y="105" width="40" height="135"/><rect x="250" y="70" width="55" height="170"/><rect x="300" y="110" width="45" height="130"/><rect x="340" y="90" width="60" height="150"/></g>
+              <g fill="#f2c230" opacity=".9"><rect x="60" y="96" width="6" height="8"/><rect x="78" y="120" width="6" height="8"/><rect x="262" y="90" width="6" height="8"/><rect x="282" y="130" width="6" height="8"/><rect x="352" y="110" width="6" height="8"/><rect x="314" y="150" width="6" height="8"/></g>
+              <rect x="140" y="60" width="120" height="180" fill="#34383e"/>
+              <rect x="152" y="40" width="96" height="34" rx="4" fill="#f2c230"/>
+              <text x="200" y="63" text-anchor="middle" font-family="Courier Prime, monospace" font-weight="700" font-size="15" fill="#1c1e21">BLUE HERON</text>
+              <rect x="180" y="160" width="40" height="80" fill="#1c1e21"/>
+              <circle cx="212" cy="200" r="2.5" fill="#f2c230"/>
+              <path d="M150 104h100M150 126h100" stroke="#4c5158" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="case-body">
+            <div class="case-meta"><span class="chip chip--tape">Now open</span><span class="chip">2–6 players</span><span class="chip">45–60 min</span></div>
+            <span class="typed case-no">Case 01 · Chicago, 1952</span>
+            <h3>The Last Call</h3>
+            <p>The owner of the Blue Heron jazz club vanished after closing. His office is wrecked, his safe is open, and the clock is still ticking toward dawn.</p>
+            <div class="case-foot"><strong class="price">$10</strong><span class="btn btn--tape" aria-hidden="true">View case <span class="arrow">→</span></span></div>
+          </div>
+        </article>
+
+        <article class="case-card case-card--soon reveal">
+          <div class="case-body">
+            <span class="typed case-no">Case 02 · Classified</span>
+            <h3>More cases are in the works</h3>
+            <p>New cases are being written and playtested now. Finish Case 01 and you'll be first to hear about the next one.</p>
+            <div class="redact" aria-hidden="true"><span></span><span></span><span></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="duo">
+    <div class="wrap duo-grid">
+      <div class="reveal">
+        <span class="eyebrow">Long distance?</span>
+        <h2>Made for two.</h2>
+        <p>Field and HQ is a perfect fit for a long-distance date: one of you at the scene, one at the precinct, both on the same call. It's one of the dates on <a href="https://frankiecampbellchicago-debug.github.io/long-distance-couples/">Love Is In The Air</a>, our site for couples who live apart.</p>
+        <a class="btn btn--ghost" href="https://frankiecampbellchicago-debug.github.io/long-distance-couples/">Visit Love Is In The Air <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Game night?</span>
+        <h2>Bring the crew.</h2>
+        <p>Groups of 3 to 6 split into two teams. Each team gathers around one screen, so the Field team argues over the scene while HQ argues over the files. One key covers everyone.</p>
+        <a class="btn btn--ghost" href="rooms/the-last-call.html">Plan a game night <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="alt">
+    <div class="wrap faq-wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions, answered.</h2>
+      </div>
+      <div class="faq">
+        <details><summary>How many people can play?</summary><p>2 to 6. With two players, each of you takes a side. With more, split into two teams. One screen per team works best.</p></details>
+        <details><summary>Do we need to be in the same place?</summary><p>No, that's the point. Play together on the couch or from different cities. You just need to be able to talk: on a video call, a phone call, or in the same room.</p></details>
+        <details><summary>What devices work?</summary><p>Any modern browser on a laptop, tablet or phone. A laptop or tablet is nicest for the Field team because the crime scene is a big picture to explore.</p></details>
+        <details><summary>How long does a case take?</summary><p>About 45–60 minutes. There's no hard cutoff. The clock keeps running if you go over, and you can use hints any time.</p></details>
+        <details><summary>How do I get my key?</summary><p>Right after checkout, your case key arrives by email and appears on the receipt page. Enter it at <a href="play.html">lockline/play</a> on each device.</p></details>
+        <details><summary>Can we play again later?</summary><p>Yes. Your key stays valid, and your progress is saved in your browser, so you can pause and pick up where you left off.</p></details>
+        <details><summary>What if we get stuck?</summary><p>Every lead has three hints, from a gentle nudge to the answer itself. Hints are free; they just show up on your final case report.</p></details>
+        <details><summary>Refunds?</summary><p>If the game doesn't work for you, email us within 14 days and we'll make it right. See the <a href="legal.html#refunds">refund policy</a>.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="./"><svg viewBox="0 0 32 32" aria-hidden="true" width="30" height="30"><rect x="1" y="1" width="30" height="30" rx="9" fill="#f2c230"/><circle cx="16" cy="13" r="4.6" fill="#1c1e21"/><path d="M13.2 15.5h5.6l1.6 9h-8.8z" fill="#1c1e21"/></svg>lockline</a>
+      <small>Online escape rooms for two screens. All stories, characters and puzzles are fictional.</small>
+      <small>© <span data-year></span> Lockline</small>
+    </div>
+    <div>
+      <h4>Play</h4>
+      <ul><li><a href="rooms/the-last-call.html">Case 01: The Last Call</a></li><li><a href="play.html">Enter a key</a></li></ul>
+    </div>
+    <div>
+      <h4>Info</h4>
+      <ul><li><a href="#faq">FAQ</a></li><li><a href="legal.html">Terms &amp; privacy</a></li><li><a href="legal.html#refunds">Refunds</a></li></ul>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
