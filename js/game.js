@@ -346,6 +346,7 @@
     solved: id => !!state.solved[id],
     seen: id => !!state.seen[id],
     done: id => !!state.done[id],
+    save,
     penalize(sec) { state.penalty += sec; save(); renderClock(); },
     rerender: render
   };

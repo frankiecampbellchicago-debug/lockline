@@ -1,10 +1,10 @@
 // Case 01 · The Last Call
-// Puzzle chain (who holds the lock → who holds the information):
-//   records : HQ enters the club's street number      ← Field reads the liquor license (4719)
-//   drawer  : Field opens the desk drawer             ← HQ's personnel file: the "songbird's" first night (0927)
-//   phone   : HQ dials the burned matchbook number    ← Field's matchbook: "...b Co.", checker stripe, ends 61
-//   cigar   : Field opens the cigar box               ← Field's coded ledger + HQ's Navy shift key (7) → MOONGLOW
-//   final   : either side names suspect + unit        ← clock vs alibis, cufflink, cab call, lease log + Vince's note
+// The Field team follows a trail through four places. Each has a few things to search and one lock;
+// opening it gives them the way into the next place. HQ works the records desk the whole time.
+//   1 office : HQ's records gate (4719, from Field's license) · Field's drawer (0927, from HQ's staff file)
+//   2 floor  : Field's cigar box (MOONGLOW: the drawer's coded ledger + HQ's Navy shift key, 7)
+//   3 alley  : HQ dials the matchbook number (Checker Cab) · Field's call box (1910, HQ's directory address)
+//   4 pier   : either side names suspect + unit (Eddie, 12)
 // Answers are stored as SHA-256 hashes (see tools/hash.mjs).
 window.LOCKLINE_ROOM = (() => {
   const answers = {
@@ -18,6 +18,7 @@ window.LOCKLINE_ROOM = (() => {
       "9135b6a9f7a0c43d29d99e7f91d086339620e304820c0fc88fa6f5a1ce4e6627"
     ],
     cigar: ["89cc0a6967c8a6565f37b45548b64b1bdc6a43e4fcf82dcae5762461e22811a9"],
+    callbox: ["e3a183a2495ebd4219af1e023d71bc16d9ebb86f522f685292163fb82b09f954"],
     final: ["a33ee7ebfbcda9c1a81b44b1760369bd590325dc956f8b3c954f01c8eea91cd8"]
   };
 
@@ -58,7 +59,7 @@ window.LOCKLINE_ROOM = (() => {
     </svg>`;
   }
 
-  const scene = `<svg class="scene-svg" viewBox="0 0 1000 600" role="img" aria-label="Vince Hale's office, ransacked. A door crossed with police tape on the left, framed papers on the wall, a desk in the middle with a phone and lamp, a window at night on the right, a shelf with a cigar box, and an open safe. Papers, a knocked-over chair and a smashed clock are on the floor.">
+  const officeScene = `<svg class="scene-svg" viewBox="0 0 1000 600" role="img" aria-label="Vince Hale's office, ransacked. A door crossed with police tape on the left, framed papers on the wall, a desk in the middle with a phone and lamp, a window at night on the right, and an open safe. Papers, a knocked-over chair and a smashed clock are on the floor.">
     <defs>
       <pattern id="wp" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#d9d8d0"/><path d="M20 0v40" stroke="#cfcec5" stroke-width="6"/></pattern>
       <pattern id="planks" width="160" height="30" patternUnits="userSpaceOnUse"><rect width="160" height="30" fill="#4a443c"/><path d="M0 29.5h160M80 0v30" stroke="#3d3832" stroke-width="2"/></pattern>
@@ -84,17 +85,6 @@ window.LOCKLINE_ROOM = (() => {
     <rect x="225" y="95" width="130" height="95" fill="#fbf8ef" stroke="#3a2e22" stroke-width="6"/>
     <rect x="240" y="108" width="100" height="6" fill="#4c5158"/><rect x="250" y="122" width="80" height="4" fill="#9a9a92"/><rect x="250" y="132" width="80" height="4" fill="#9a9a92"/><rect x="250" y="142" width="60" height="4" fill="#9a9a92"/>
     <circle cx="326" cy="168" r="11" fill="none" stroke="#b3261e" stroke-width="3"/>
-    <!-- band photo, hanging crooked -->
-    <g transform="rotate(-5 480 138)">
-      <rect x="390" y="80" width="180" height="115" fill="#2b2d31" stroke="#3a2e22" stroke-width="6"/>
-      <g fill="#6b6f76"><circle cx="420" cy="130" r="9"/><rect x="410" y="140" width="20" height="40"/><circle cx="452" cy="126" r="9"/><rect x="442" y="136" width="20" height="44"/><circle cx="487" cy="118" r="12"/><rect x="473" y="131" width="28" height="49"/><circle cx="522" cy="128" r="9"/><rect x="512" y="138" width="20" height="42"/><circle cx="550" cy="130" r="9"/><rect x="540" y="140" width="20" height="40"/></g>
-      <path d="M498 140 l22 -8 l2 6 l-22 8z" fill="#c9a227"/>
-    </g>
-    <!-- shelf + cigar box -->
-    <rect x="760" y="300" width="190" height="10" fill="#5a4632"/><path d="M780 310l10 22M930 310l-10 22" stroke="#5a4632" stroke-width="6"/>
-    <rect x="795" y="266" width="96" height="34" fill="#8b5a2b" stroke="#1c1e21" stroke-width="2"/><rect x="795" y="266" width="96" height="9" fill="#6e4520"/>
-    <rect x="822" y="279" width="42" height="13" fill="#f3e3b5"/><text x="843" y="289" text-anchor="middle" font-family="Courier Prime, monospace" font-size="9" font-weight="700" fill="#1c1e21">HAVANA</text>
-    <rect x="880" y="280" width="16" height="16" rx="3" fill="#c9a227" stroke="#1c1e21" stroke-width="2"/>
     <!-- safe -->
     <rect x="790" y="350" width="140" height="150" fill="#22252a" stroke="#1c1e21" stroke-width="4"/>
     <rect x="800" y="420" width="120" height="6" fill="#3b3f45"/>
@@ -122,22 +112,85 @@ window.LOCKLINE_ROOM = (() => {
     <circle cx="472" cy="522" r="6" fill="#c9a227" stroke="#1c1e21" stroke-width="1.5"/><path d="M478 512l4 -6M482 520h6" stroke="#f2c230" stroke-width="2" stroke-linecap="round"/>
   </svg>`;
 
-  // ---------- Field: things to examine ----------
-  // x/y are hotspot positions in % of the scene.
-  const spots = [
-    { id: "license", x: 29, y: 24, label: "Framed certificate" },
-    { id: "photo", x: 48, y: 23, label: "Band photo" },
-    { id: "door", x: 17, y: 52, label: "Office door" },
-    { id: "window", x: 82, y: 25, label: "Window" },
-    { id: "desk", x: 50, y: 54, label: "Desk" },
-    { id: "drawer", x: 62, y: 65, label: "Locked drawer" },
-    { id: "phone", x: 37, y: 50, label: "Telephone" },
-    { id: "cigar", x: 84, y: 46, label: "Cigar box" },
-    { id: "safe", x: 86, y: 70, label: "Open safe" },
-    { id: "clock", x: 59, y: 91, label: "Smashed clock" },
-    { id: "cufflink", x: 47, y: 85, label: "Something shiny" },
-    { id: "ticket", x: 24, y: 90, label: "Ticket stub" }
-  ];
+  const floorScene = `<svg class="scene-svg" viewBox="0 0 1000 600" role="img" aria-label="The Blue Heron's club floor after closing. A stage with a piano and microphone on the left under a framed band photo, a coat check window in the middle, narrow back stairs going up to the office, and the bar on the right with bottles and a cigar box on the back shelf.">
+    <defs><pattern id="tiles" width="60" height="30" patternUnits="userSpaceOnUse"><rect width="60" height="30" fill="#2a221c"/><rect width="30" height="15" fill="#33291f"/><rect x="30" y="15" width="30" height="15" fill="#33291f"/></pattern>
+      <radialGradient id="spot" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#f3e3b5" stop-opacity=".35"/><stop offset="1" stop-color="#f3e3b5" stop-opacity="0"/></radialGradient></defs>
+    <rect width="1000" height="460" fill="#3a1f24"/><rect y="440" width="1000" height="160" fill="url(#tiles)"/>
+    <g stroke="#2e181c" stroke-width="2">${Array.from({ length: 25 }, (_, i) => `<path d="M${i * 40} 0v440"/>`).join("")}</g>
+    <!-- stage -->
+    <path d="M140 0 L40 430 L400 430 L300 0 Z" fill="url(#spot)"/>
+    <rect x="20" y="410" width="400" height="40" fill="#4a3426" stroke="#111e2b" stroke-width="3"/>
+    <path d="M60 410v-110h150l40 40v70z" fill="#111e2b"/><rect x="70" y="330" width="120" height="10" fill="#f3efe2"/><g fill="#111e2b">${Array.from({ length: 10 }, (_, i) => `<rect x="${72 + i * 12}" y="330" width="6" height="7"/>`).join("")}</g>
+    <path d="M330 410v-130" stroke="#9a9a92" stroke-width="4"/><ellipse cx="330" cy="275" rx="9" ry="13" fill="#6b6f76" stroke="#111e2b" stroke-width="2"/><path d="M312 410h36" stroke="#9a9a92" stroke-width="5"/>
+    <!-- band photo -->
+    <rect x="150" y="80" width="190" height="120" fill="#2b2d31" stroke="#c9a227" stroke-width="6"/>
+    <g fill="#6b6f76"><circle cx="180" cy="128" r="9"/><rect x="170" y="138" width="20" height="44"/><circle cx="215" cy="124" r="9"/><rect x="205" y="134" width="20" height="48"/><circle cx="252" cy="116" r="12"/><rect x="238" y="129" width="28" height="53"/><circle cx="288" cy="126" r="9"/><rect x="278" y="136" width="20" height="46"/><circle cx="318" cy="128" r="9"/><rect x="308" y="138" width="20" height="44"/></g>
+    <path d="M262 140 l22 -8 l2 6 l-22 8z" fill="#c9a227"/>
+    <!-- coat check -->
+    <rect x="430" y="150" width="140" height="180" fill="#1d1416" stroke="#111e2b" stroke-width="4"/>
+    <rect x="442" y="200" width="116" height="110" fill="#5a3a2a"/>
+    <path d="M462 210h18l4 70h-26z" fill="#c8a878"/><path d="M500 210h16l4 60h-24z" fill="#2b2d31"/><path d="M528 210h16l4 66h-24z" fill="#2b2d31"/>
+    <rect x="430" y="320" width="140" height="16" fill="#6b5640" stroke="#111e2b" stroke-width="3"/>
+    <rect x="452" y="160" width="96" height="24" fill="#c9a227"/><text x="500" y="177" text-anchor="middle" font-family="Courier Prime, monospace" font-weight="700" font-size="13" fill="#111e2b">COAT CHECK</text>
+    <!-- back stairs -->
+    <g fill="#4a3426" stroke="#111e2b" stroke-width="2">${Array.from({ length: 8 }, (_, i) => `<rect x="${590 + i * 4}" y="${440 - (i + 1) * 36}" width="70" height="36"/>`).join("")}</g>
+    <rect x="610" y="60" width="64" height="96" fill="#6b5a48" stroke="#111e2b" stroke-width="3"/><text x="642" y="54" text-anchor="middle" font-family="Courier Prime, monospace" font-size="12" font-weight="700" fill="#e6dcc3">OFFICE ↑</text>
+    <circle cx="628" cy="398" r="5" fill="#c9a227" stroke="#111e2b" stroke-width="1.5"/>
+    <!-- bar -->
+    <rect x="700" y="110" width="290" height="10" fill="#5a4632"/><rect x="700" y="190" width="290" height="10" fill="#5a4632"/><rect x="700" y="270" width="290" height="10" fill="#5a4632"/>
+    <g>${[715, 745, 770, 800, 830, 900, 930, 960].map((x, i) => `<rect x="${x}" y="${i % 2 ? 66 : 74}" width="16" height="${i % 2 ? 44 : 36}" rx="4" fill="${["#2e6b3f", "#7a2e22", "#c9a227", "#3b4956"][i % 4]}"/>`).join("")}${[720, 760, 860, 890, 940].map((x, i) => `<rect x="${x}" y="${i % 2 ? 148 : 156}" width="18" height="${i % 2 ? 42 : 34}" rx="4" fill="${["#7a2e22", "#3b4956", "#2e6b3f"][i % 3]}"/>`).join("")}</g>
+    <rect x="800" y="236" width="96" height="34" fill="#8b5a2b" stroke="#111e2b" stroke-width="2"/><rect x="800" y="236" width="96" height="9" fill="#6e4520"/>
+    <rect x="827" y="249" width="42" height="13" fill="#f3e3b5"/><text x="848" y="259" text-anchor="middle" font-family="Courier Prime, monospace" font-size="9" font-weight="700" fill="#111e2b">HAVANA</text>
+    <rect x="884" y="250" width="16" height="16" rx="3" fill="#c9a227" stroke="#111e2b" stroke-width="2"/>
+    <rect x="690" y="350" width="310" height="22" fill="#5a4632" stroke="#111e2b" stroke-width="3"/><rect x="700" y="372" width="300" height="88" fill="#6b5640" stroke="#111e2b" stroke-width="3"/>
+    <g fill="#5a4632">${[740, 830, 920].map(x => `<rect x="${x}" y="470" width="8" height="70"/><ellipse cx="${x + 4}" cy="466" rx="24" ry="8"/>`).join("")}</g>
+  </svg>`;
+
+  const alleyScene = `<svg class="scene-svg" viewBox="0 0 1000 600" role="img" aria-label="The alley behind the Blue Heron. The club's stage door under a caged light on the left, a puddle in front of it, trash cans against the brick wall, tire tracks across the wet ground, and a blue police call box on a post at the mouth of the alley.">
+    <defs><pattern id="brick" width="60" height="30" patternUnits="userSpaceOnUse"><rect width="60" height="30" fill="#5a2f26"/><path d="M0 15h60M0 30h60M30 0v15M0 15v15M60 15v15" stroke="#3e211b" stroke-width="3"/></pattern>
+      <radialGradient id="lamp" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#f3e3b5" stop-opacity=".5"/><stop offset="1" stop-color="#f3e3b5" stop-opacity="0"/></radialGradient></defs>
+    <rect width="1000" height="600" fill="#111e2b"/>
+    <rect width="760" height="440" fill="url(#brick)"/>
+    <rect x="760" y="0" width="240" height="440" fill="#1b2b40"/><path d="M800 440v-260M800 180h40" stroke="#3b4956" stroke-width="6"/><circle cx="846" cy="186" r="10" fill="#f3e3b5"/>
+    <rect y="440" width="1000" height="160" fill="#2b2d31"/>
+    <!-- stage door + light -->
+    <path d="M180 60 L60 440 L340 440 L220 60 Z" fill="url(#lamp)"/>
+    <rect x="140" y="170" width="120" height="270" fill="#3b3f45" stroke="#111e2b" stroke-width="5"/><circle cx="240" cy="310" r="7" fill="#c9a227"/>
+    <rect x="186" y="120" width="28" height="30" fill="#f3e3b5" stroke="#111e2b" stroke-width="3"/><path d="M186 135h28M200 120v30" stroke="#111e2b" stroke-width="2"/>
+    <text x="200" y="196" text-anchor="middle" font-family="Courier Prime, monospace" font-size="12" font-weight="700" fill="#e6dcc3">STAGE DOOR</text>
+    <!-- puddle + matchbook -->
+    <ellipse cx="240" cy="540" rx="120" ry="26" fill="#1b2b40"/><ellipse cx="220" cy="534" rx="70" ry="10" fill="#3b4956" opacity=".5"/>
+    <g transform="rotate(-14 267 538)"><rect x="250" y="528" width="34" height="20" fill="#f3e3b5" stroke="#111e2b" stroke-width="1.5"/><rect x="250" y="528" width="12" height="20" fill="#5a3d22"/></g>
+    <!-- trash cans -->
+    <g stroke="#111e2b" stroke-width="3"><rect x="380" y="340" width="80" height="100" rx="6" fill="#6b6f76"/><rect x="372" y="330" width="96" height="14" rx="4" fill="#9a9a92"/><rect x="480" y="352" width="76" height="88" rx="6" fill="#585c63"/><path d="M476 350 L560 330 L566 344 L480 362 Z" fill="#9a9a92"/></g>
+    <rect x="498" y="336" width="26" height="12" fill="#f3efe2" transform="rotate(-20 511 342)"/>
+    <!-- tire tracks -->
+    <g fill="none" stroke="#1a1c20" stroke-width="10" stroke-dasharray="14 8"><path d="M300 600 Q 520 470 1000 500"/><path d="M380 600 Q 600 500 1000 560"/></g>
+    <!-- police call box -->
+    <path d="M900 440v-120" stroke="#3b4956" stroke-width="10"/>
+    <rect x="866" y="230" width="68" height="100" rx="6" fill="#2c4a7a" stroke="#111e2b" stroke-width="4"/><rect x="878" y="244" width="44" height="14" fill="#e6dcc3"/><text x="900" y="255" text-anchor="middle" font-family="Courier Prime, monospace" font-size="9" font-weight="700" fill="#111e2b">POLICE</text>
+    <circle cx="900" cy="292" r="12" fill="#1b2b40" stroke="#e6dcc3" stroke-width="2"/>
+  </svg>`;
+
+  const pierScene = `<svg class="scene-svg" viewBox="0 0 1000 600" role="img" aria-label="Pier 9 before dawn. The lake and a watchman's shack on the left, and on the right the long cold-storage shed with numbered roll-up doors, frost on the ground, footprints in the frost, and a soggy slip of paper on the dock.">
+    <defs><linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#111e2b"/><stop offset="1" stop-color="#3b4956"/></linearGradient></defs>
+    <rect width="1000" height="330" fill="url(#dawn)"/><rect y="250" width="420" height="90" fill="#1b2b40"/><path d="M0 280h420M30 300h360M60 320h300" stroke="#3b4956" stroke-width="2" opacity=".6"/>
+    <rect y="330" width="1000" height="270" fill="#585c63"/><rect y="330" width="1000" height="270" fill="#e6e8ea" opacity=".18"/>
+    <!-- shack -->
+    <rect x="60" y="230" width="150" height="130" fill="#6b5640" stroke="#111e2b" stroke-width="4"/><path d="M50 234 L135 190 L220 234 Z" fill="#4a3426" stroke="#111e2b" stroke-width="4"/>
+    <rect x="80" y="260" width="50" height="40" fill="#111e2b"/><rect x="150" y="270" width="42" height="90" fill="#4a3426" stroke="#111e2b" stroke-width="3"/>
+    <rect x="148" y="296" width="46" height="24" fill="#f3efe2"/><path d="M154 304h34M154 312h24" stroke="#111e2b" stroke-width="2"/>
+    <!-- shed -->
+    <rect x="420" y="130" width="580" height="230" fill="#9a9a92" stroke="#111e2b" stroke-width="4"/><rect x="420" y="130" width="580" height="30" fill="#6b6f76"/>
+    <text x="710" y="152" text-anchor="middle" font-family="Courier Prime, monospace" font-weight="700" font-size="16" fill="#111e2b">LAKEFRONT COLD STORAGE · PIER 9</text>
+    ${[9, 10, 11, 12, 13, 14].map((n, i) => `<rect x="${440 + i * 92}" y="190" width="76" height="170" fill="#c9cbcd" stroke="#111e2b" stroke-width="3"/>${Array.from({ length: 6 }, (_, k) => `<path d="M${440 + i * 92} ${214 + k * 24}h76" stroke="#9a9ea5" stroke-width="2"/>`).join("")}<text x="${478 + i * 92}" y="184" text-anchor="middle" font-family="Courier Prime, monospace" font-weight="700" font-size="14" fill="#111e2b">${n}</text><rect x="${470 + i * 92}" y="340" width="16" height="14" rx="2" fill="#6b6f76" stroke="#111e2b" stroke-width="2"/>`).join("")}
+    <rect x="446" y="226" width="64" height="20" fill="#f3efe2"/><text x="478" y="240" text-anchor="middle" font-family="Courier Prime, monospace" font-weight="700" font-size="10" fill="#111e2b">FURS</text>
+    <!-- footprints + drag marks -->
+    <g fill="#3b3f45" opacity=".75">${Array.from({ length: 7 }, (_, i) => `<ellipse cx="${300 + i * 62}" cy="${560 - i * 26}" rx="11" ry="6" transform="rotate(-24 ${300 + i * 62} ${560 - i * 26})"/>`).join("")}</g>
+    <path d="M320 580 Q 520 470 720 372" fill="none" stroke="#3b3f45" stroke-width="5" opacity=".45"/><path d="M340 586 Q 540 476 740 374" fill="none" stroke="#3b3f45" stroke-width="5" opacity=".45"/>
+    <!-- claim check -->
+    <rect x="320" y="500" width="50" height="30" fill="#f3e3b5" stroke="#111e2b" stroke-width="1.5" transform="rotate(10 345 515)"/>
+  </svg>`;
 
   const doc = (inner, cls = "") => `<div class="doc ${cls}">${inner}</div>`;
   const note = text => `<div class="handnote">${text}</div>`;
@@ -149,62 +202,122 @@ window.LOCKLINE_ROOM = (() => {
     </tbody></table>
     <p class="small muted">Vince's handwriting. Every word is gibberish, but the digits look normal.</p>`, "doc--ledger");
 
+  // ---------- Field: the trail ----------
+  // Four places in order. Each has 3–4 things to search (x/y are hotspot positions in % of the scene);
+  // the one marked lock opens the way to the next place.
+  const areas = [
+    { id: "office", name: "Vince's office", where: "Upstairs at the Blue Heron", scene: officeScene,
+      spots: [
+        { id: "license", x: 29, y: 24, label: "Framed certificate" },
+        { id: "safe", x: 86, y: 70, label: "Open safe" },
+        { id: "clock", x: 59, y: 91, label: "Smashed clock" },
+        { id: "desk", x: 50, y: 60, label: "Desk", lock: "drawer" }
+      ] },
+    { id: "floor", name: "The club floor", where: "Downstairs, after closing", scene: floorScene, after: "drawer",
+      arrive: "You take the back stairs down. The chairs are up on the tables and the stage lights are still warm. The key from the drawer is tagged <strong>BAR</strong>.",
+      spots: [
+        { id: "photo", x: 24, y: 23, label: "Band photo" },
+        { id: "coatcheck", x: 50, y: 40, label: "Coat check" },
+        { id: "cufflink", x: 63, y: 66, label: "Something shiny on the stairs" },
+        { id: "cigar", x: 85, y: 42, label: "Cigar box behind the bar", lock: "cigar" }
+      ] },
+    { id: "alley", name: "The alley", where: "Behind the club", scene: alleyScene, after: "cigar",
+      arrive: "The key from the cigar box opens the stage door. Cold air, wet bricks, and a long alley that runs out to the street.",
+      spots: [
+        { id: "tracks", x: 64, y: 86, label: "Tire tracks" },
+        { id: "matchbook", x: 27, y: 89, label: "Something in the puddle" },
+        { id: "trash", x: 45, y: 62, label: "Trash cans" },
+        { id: "callbox", x: 90, y: 47, label: "Police call box", lock: "callbox" }
+      ] },
+    { id: "pier", name: "Pier 9", where: "The lakefront, just before dawn", scene: pierScene, after: "callbox",
+      arrive: "The squad car drops you at the lakefront. Frost on the ground, the lake going gray. Somewhere in this shed is Vince. You've got minutes, not hours.",
+      spots: [
+        { id: "shack", x: 13, y: 50, label: "Watchman's shack" },
+        { id: "units", x: 71, y: 47, label: "Storage units" },
+        { id: "prints", x: 50, y: 84, label: "Marks in the frost" },
+        { id: "claim", x: 34, y: 86, label: "Soggy slip of paper" }
+      ] }
+  ];
+  const unlocked = (ctx, a) => !a.after || ctx.solved(a.after);
+  const openLabel = { drawer: "Desk (drawer open)", cigar: "Cigar box (open)", callbox: "Police call box" };
+
   function fieldItem(ctx, id) {
     const solved = ctx.solved;
     switch (id) {
+      // 1 · office
       case "license": return ["Framed certificate", doc(`
         <p class="doc-h">City of Chicago · Liquor Control Commission</p>
         <h3 class="doc-title">Retail Liquor Dealer's License</h3>
         <dl class="doc-dl"><dt>License no.</dt><dd>52-1187</dd><dt>Issued to</dt><dd>Vincent J. Hale</dd><dt>Doing business as</dt><dd>The Blue Heron</dd><dt>Premises</dt><dd>4719 S. State St., Chicago, Ill.</dd><dt>Expires</dt><dd>April 30, 1953</dd></dl>
         <p class="small muted">Must be displayed in plain view on the licensed premises.</p>`)];
-      case "photo": return ["Band photo", `<div>
-        <div class="photo-frame"><svg viewBox="0 0 360 200" role="img" aria-label="Black and white photo of five musicians on the club's stage. In the middle, the tallest and broadest man holds a trumpet."><rect width="360" height="200" fill="#3b3f45"/><rect y="150" width="360" height="50" fill="#2b2d31"/>${[40, 105, 180, 255, 320].map((x, i) => `<circle cx="${x}" cy="${i === 2 ? 62 : 78}" r="${i === 2 ? 20 : 15}" fill="#9a9ea5"/><rect x="${x - (i === 2 ? 26 : 18)}" y="${i === 2 ? 84 : 95}" width="${i === 2 ? 52 : 36}" height="${i === 2 ? 90 : 75}" rx="8" fill="#6b6f76"/>`).join("")}<path d="M196 112 l44 -14 l3 9 l-44 14 z" fill="#d6c27a"/><circle cx="244" cy="101" r="8" fill="#d6c27a"/></svg></div>
-        ${doc(`<p class="typed">THE BLUE HERON ORCHESTRA · 1951</p><p class="small">L to R: Lou Pratt (piano) · Ruby Lane (vocals) · Eddie Marsh (trumpet, bandleader) · Jimmy Ruiz (bass) · Sam "Tiny" Cole (drums)</p>`)}
-        <p class="muted small">The frame hangs crooked, as if someone bumped it hard.</p></div>`];
-      case "door": return ["Office door", `<div><p>The lock wasn't forced; whoever came in, Vince let them in.</p><p>A few <strong>green wool fibers</strong> are snagged on the upper hinge, at about shoulder height for a short person.</p></div>`];
-      case "window": return ["Window", `<div><p>Latched from the inside, and the fire escape is rusted solid. Nobody came or went this way.</p><p>Down in the alley, fresh tire tracks lead from the club's back door toward the street.</p></div>`];
-      case "phone": return ["Telephone", `<div><p>The receiver is off the hook, dangling by its cord. Somebody either grabbed for it or knocked it flying.</p><p class="muted small">Phones in 1952 don't remember the last number dialed. You'll have to find it another way.</p></div>`];
       case "safe": return ["Open safe", `<div><p>The door is open and there are no scratches on the dial. Whoever opened it knew the combination, or made Vince open it.</p><p>A few loose bills are still inside. <strong>This wasn't a robbery.</strong> On the top shelf, a clean rectangle in the dust shows where a thick book used to sit. It's the only thing missing.</p></div>`];
       case "clock": return ["Smashed clock", `<div class="clock-item">${clockSVG}<p>Knocked off the wall during a struggle. The glass is shattered and the hands are stuck.</p></div>`];
-      case "cufflink": return ["Something shiny", `<div class="cuff-item"><svg viewBox="0 0 120 80" role="img" aria-label="A gold cufflink shaped like two joined eighth notes, with a bent post."><g fill="#c9a227" stroke="#1c1e21" stroke-width="2"><ellipse cx="38" cy="58" rx="13" ry="10"/><ellipse cx="82" cy="52" rx="13" ry="10"/><rect x="47" y="14" width="6" height="44"/><rect x="91" y="8" width="6" height="44"/><path d="M47 14 L97 8 L97 18 L47 24 Z"/></g><path d="M60 70 q6 6 14 2" stroke="#9a9a92" stroke-width="3" fill="none"/></svg><p>Under the desk: a single <strong>gold cufflink shaped like two musical notes</strong>. Its post is bent, as if it was torn off a sleeve.</p></div>`];
-      case "ticket": return ["Ticket stub", doc(`
-        <p class="doc-h">Lakefront Cold Storage Co.</p>
-        <h3 class="doc-title">Pier 9 · Claim Check</h3>
-        <dl class="doc-dl"><dt>Unit no.</dt><dd><span class="smudge" aria-label="smudged, unreadable">▓▓</span></dd><dt>Leased</dt><dd>Oct. 1, 1952</dd><dt>Term</dt><dd>1 week · paid in cash</dd><dt>Lessee</dt><dd><span class="smudge" aria-label="smudged, unreadable">▓▓▓▓▓▓</span></dd></dl>
-        <p class="small muted">Found on the floor by the door. It's damp and the ink has run.</p>`, "doc--ticket")];
-      case "desk": return ["Desk", `<div>${note("Drawer = the night our songbird first sang.<br>Month, day. &nbsp;—V")}<p>A note in Vince's handwriting sits under the blotter. The right-hand drawer has a <strong>4-digit padlock</strong> on it.</p><button class="btn" type="button" data-goto="drawer">Look at the drawer</button></div>`];
-      case "drawer": {
+      case "desk": {
         if (solved("drawer")) return ["Desk drawer (open)", drawerContents(ctx)];
         const w = ctx.wheels({ length: 4, kind: "digits", label: "Drawer padlock" });
-        const box = ctx.h(`<div><p>A brass 4-digit padlock. Vince's note says: <em>"the night our songbird first sang. Month, day."</em></p></div>`);
-        box.append(ctx.lockForm({ id: "drawer", control: w, button: "Open drawer", onSolve: () => ctx.open(...fieldItemArgs(ctx, "drawer")) }));
-        return ["Locked drawer", box];
+        const box = ctx.h(`<div>${note("Drawer = the night our songbird first sang.<br>Month, day. &nbsp;—V")}<p>A note in Vince's handwriting sits under the blotter. The right-hand drawer has a <strong>4-digit padlock</strong> on it.</p></div>`);
+        box.append(ctx.lockForm({ id: "drawer", control: w, button: "Open drawer", onSolve: () => openSpot(ctx, "desk") }));
+        return ["Desk", box];
       }
+      // 2 · club floor
+      case "photo": return ["Band photo", `<div>
+        <div class="photo-frame"><svg viewBox="0 0 360 200" role="img" aria-label="Black and white photo of five musicians on the club's stage. In the middle, the tallest and broadest man holds a trumpet."><rect width="360" height="200" fill="#3b3f45"/><rect y="150" width="360" height="50" fill="#2b2d31"/>${[40, 105, 180, 255, 320].map((x, i) => `<circle cx="${x}" cy="${i === 2 ? 62 : 78}" r="${i === 2 ? 20 : 15}" fill="#9a9ea5"/><rect x="${x - (i === 2 ? 26 : 18)}" y="${i === 2 ? 84 : 95}" width="${i === 2 ? 52 : 36}" height="${i === 2 ? 90 : 75}" rx="8" fill="#6b6f76"/>`).join("")}<path d="M196 112 l44 -14 l3 9 l-44 14 z" fill="#d6c27a"/><circle cx="244" cy="101" r="8" fill="#d6c27a"/></svg></div>
+        ${doc(`<p class="typed">THE BLUE HERON ORCHESTRA · 1951</p><p class="small">L to R: Lou Pratt (piano) · Ruby Lane (vocals) · Eddie Marsh (trumpet, bandleader) · Jimmy Ruiz (bass) · Sam "Tiny" Cole (drums)</p>`)}</div>`];
+      case "coatcheck": return ["Coat check", doc(`<p class="doc-h">Hat &amp; coat check · Fri., Oct. 3</p>
+        <div class="table-wrap"><table class="rec"><thead><tr><th scope="col">Ticket</th><th scope="col">Item</th><th scope="col">Name</th><th scope="col">Picked up</th></tr></thead><tbody>
+        <tr><td class="typed">11</td><td>Gray fedora</td><td>Lou Pratt</td><td class="typed">1:05</td></tr>
+        <tr><td class="typed">14</td><td>Green wool coat</td><td>Ruby Lane</td><td class="typed">12:30</td></tr>
+        <tr><td class="typed">17</td><td>Camel overcoat</td><td>E. Marsh</td><td class="typed">—</td></tr>
+        <tr><td class="typed">19</td><td>Mink stole</td><td>(walk-in)</td><td class="typed">12:50</td></tr>
+        </tbody></table></div>
+        <p class="small muted">Ticket 17's camel overcoat is still on its hook. Somebody left in a hurry, on a cold night, without his coat.</p>`)];
+      case "cufflink": return ["Something shiny on the stairs", `<div class="cuff-item"><svg viewBox="0 0 120 80" role="img" aria-label="A gold cufflink shaped like two joined eighth notes, with a bent post."><g fill="#c9a227" stroke="#111e2b" stroke-width="2"><ellipse cx="38" cy="58" rx="13" ry="10"/><ellipse cx="82" cy="52" rx="13" ry="10"/><rect x="47" y="14" width="6" height="44"/><rect x="91" y="8" width="6" height="44"/><path d="M47 14 L97 8 L97 18 L47 24 Z"/></g><path d="M60 70 q6 6 14 2" stroke="#9a9a92" stroke-width="3" fill="none"/></svg><p>Wedged on the third step up to the office: a single <strong>gold cufflink shaped like two musical notes</strong>. Its post is bent, as if it was torn off a sleeve while someone dragged something heavy down these stairs.</p></div>`];
       case "cigar": {
         if (solved("cigar")) return ["Cigar box (open)", cigarContents()];
         const w = ctx.wheels({ length: 8, kind: "letters", label: "Cigar box letter lock" });
-        const box = ctx.h(`<div><p>A Havana cigar box with a small <strong>8-letter combination lock</strong>. It's heavy; something besides cigars is inside.</p></div>`);
-        box.append(ctx.lockForm({ id: "cigar", control: w, button: "Open box", onSolve: () => ctx.open(...fieldItemArgs(ctx, "cigar")) }));
-        return ["Cigar box", box];
+        const box = ctx.h(`<div><p>The BAR key opens the cabinet behind the bar. Inside, a Havana cigar box with an <strong>8-letter combination lock</strong>. It's heavy; something besides cigars is inside.</p></div>`);
+        box.append(ctx.lockForm({ id: "cigar", control: w, button: "Open box", onSolve: () => openSpot(ctx, "cigar") }));
+        return ["Cigar box behind the bar", box];
       }
+      // 3 · alley
+      case "tracks": return ["Tire tracks", `<div><p>Fresh tracks in the wet, from a car that pulled right up to the stage door and then out toward the street. The tread is wide, the kind on a big sedan or a <strong>taxi</strong>.</p><p>Next to the door, two sets of footprints: one deep and heavy, one dragging.</p></div>`];
+      case "matchbook": return ["Something in the puddle", `<div><div class="ev-art">${matchbookSVG}</div><p>A matchbook, half burned and soaked. Someone lit a cigarette by the stage door and tossed it. The phone number is partly gone.</p></div>`];
+      case "trash": return ["Trash cans", `<div>${doc(`<p class="doc-h">Washington Park Race Track · Win tickets</p><p class="typed">RACE 6 · #4 SILVER BELL · $200 &nbsp;✗<br>RACE 7 · #2 LUCKY STRIKE · $300 &nbsp;✗<br>RACE 8 · #7 HIGH NOTE · $500 &nbsp;✗</p>`)}<p>A fistful of losing race tickets, $1,000 worth, crumpled and thrown away last night. Whoever bet these was in deep.</p></div>`];
+      case "callbox": {
+        if (solved("callbox")) return ["Police call box", `<div><p>"Car 22, on its way to you. Two minutes." The squad car is idling at the mouth of the alley.</p><p class="next-note">New place unlocked: <strong>Pier 9</strong>.</p></div>`];
+        const w = ctx.wheels({ length: 4, kind: "digits", label: "Street number" });
+        const box = ctx.h(`<div><p>You pick up the call box phone. "Dispatch. Where do you need the car?"</p><p>A cab took Vince somewhere. <strong>HQ can find out where</strong>; give dispatch the <strong>street number</strong>.</p></div>`);
+        box.append(ctx.lockForm({ id: "callbox", control: w, button: "Send the car", wrong: "\"There's nothing at that number, detective. Check your address.\"", onSolve: () => openSpot(ctx, "callbox") }));
+        return ["Police call box", box];
+      }
+      // 4 · pier
+      case "shack": return ["Watchman's shack", `<div>${note("Gone for coffee.<br>Back by 2:30 &nbsp;—Gus")}<p>The shack is empty and the stove is cold. Between about 1:30 and 2:30, nobody was watching the sheds.</p></div>`];
+      case "units": return ["Storage units", `<div><p>Rows of numbered roll-up doors, all frosted over. Most padlocks are dull and iced. <strong>Units 5, 12 and 15</strong> have shiny new padlocks with the frost knocked off. Unit 9 has a painted card: <em>Hale, furs, seasonal</em>.</p><p>You can't open them all. Pick the wrong one and you'll lose time he doesn't have.</p></div>`];
+      case "prints": return ["Marks in the frost", `<div><p>Big footprints, <strong>size 13 at least</strong>, with two long drag marks beside them, like a man's heels. They lead from the road to the middle of the shed and stop at a row of doors.</p></div>`];
+      case "claim": return ["Soggy slip of paper", doc(`
+        <p class="doc-h">Lakefront Cold Storage Co.</p>
+        <h3 class="doc-title">Pier 9 · Claim Check</h3>
+        <dl class="doc-dl"><dt>Unit no.</dt><dd><span class="smudge" aria-label="smudged, unreadable">▓▓</span></dd><dt>Leased</dt><dd>Oct. 1, 1952</dd><dt>Term</dt><dd>1 week · paid in cash</dd><dt>Lessee</dt><dd><span class="smudge" aria-label="smudged, unreadable">▓▓▓▓▓▓</span></dd></dl>
+        <p class="small muted">Dropped in the frost. It's soaked and the ink has run.</p>`, "doc--ticket")];
     }
   }
-  const fieldItemArgs = (ctx, id) => { const [t, c] = fieldItem(ctx, id); return [t, c, { id, wide: ["drawer", "photo", "cigar"].includes(id) }]; };
+  const wideItems = ["desk", "photo", "cigar", "coatcheck", "matchbook"];
+  const fieldItemArgs = (ctx, id) => { const [t, c] = fieldItem(ctx, id); return [t, c, { id, wide: wideItems.includes(id) }]; };
 
   function drawerContents(ctx) {
-    const box = ctx.h(`<div class="drawer-grid">
-      <figure class="ev"><div class="ev-art">${matchbookSVG}</div><figcaption><strong>Matchbook</strong>, half burned. The phone number is partly gone.</figcaption></figure>
+    return ctx.h(`<div><div class="drawer-grid">
       <figure class="ev">${ledgerHTML}<figcaption><strong>Ledger page</strong>, torn out. The rest of the book is missing.</figcaption></figure>
       <figure class="ev">${doc(`<p class="doc-title" style="font-size:1.2rem">Leo Castellano</p><p class="typed small">THE VELVET ROOM · DRexel 3-0505</p>${note("Offer stands. Let's talk about the Heron. —L")}`)}<figcaption><strong>Business card</strong>, with a note on the back.</figcaption></figure>
-    </div>`);
-    return box;
+      <figure class="ev">${doc(`<p class="doc-title" style="font-size:1.6rem;margin:0">BAR</p><p class="small muted" style="margin:0">brass key, paper tag</p>`)}<figcaption><strong>A brass key</strong> on a tag that says BAR.</figcaption></figure>
+    </div><p class="next-note">New place unlocked: <strong>the club floor</strong>. Head downstairs.</p></div>`);
   }
   function cigarContents() {
     return `<div>${doc(`<p class="doc-h">Folded inside the box, in Vince's hand</p>
       <div class="handnote handnote--long">If you're reading this, something happened to me.<br><br>
       Eddie Marsh — <u>"Two-Tone"</u> to the band — owes me $4,000, and he's been skimming the door money for months. Tonight I told him I'm taking my ledger to the police on Monday.<br><br>
       He laughed. He didn't look like he was laughing.<br><br>— V.H.</div>`)}
-      <p class="muted small">Under the note: three cigars and a roll of twenties. Vince was hiding the note from someone who'd look in the obvious places.</p></div>`;
+      <p class="muted small">Under the note: three cigars, a roll of twenties, and a key stamped <strong>STAGE DOOR</strong>.</p>
+      <p class="next-note">New place unlocked: <strong>the alley</strong>.</p></div>`;
   }
 
   // ---------- HQ: records desk ----------
@@ -229,16 +342,16 @@ window.LOCKLINE_ROOM = (() => {
       desc: "5'6\". Vincent Hale's wife of eleven years.", alibi: "Says she was home in Hyde Park, asleep. Alone.", record: "None.", notes: "Took out a $20,000 life insurance policy on her husband in August." }
   ];
   const directory = [
-    { name: "Blue Heron, The (nightclub)", num: "KEnwood 6-4719", ico: "note" },
-    { name: "Blue Ribbon Cab Co.", num: "WAbash 2-7714", ico: "cab" },
-    { name: "Checker Cab Co.", num: "WAbash 2-3361", ico: "cabcheck" },
-    { name: "Checkerboard Club (billiards)", num: "WAbash 2-1161", ico: "board" },
-    { name: "Checkmate Chess Club", num: "WAbash 2-2861", ico: "knight" },
-    { name: "Hale, Vincent J. (residence)", num: "HYde Park 3-2210", ico: "house" },
-    { name: "Lakefront Cold Storage Co., Pier 9", num: "FRanklin 2-9090", ico: "snow" },
-    { name: "Savoy Ballroom", num: "KEnwood 6-1200", ico: "note" },
-    { name: "Velvet Room, The (nightclub)", num: "DRexel 3-0505", ico: "note" },
-    { name: "Yellow Cab Co.", num: "WAbash 2-4461", ico: "cab" }
+    { name: "Blue Heron, The (nightclub)", addr: "4719 S. State St.", num: "KEnwood 6-4719", ico: "note" },
+    { name: "Blue Ribbon Cab Co.", addr: "2240 S. Wabash Ave.", num: "WAbash 2-7714", ico: "cab" },
+    { name: "Checker Cab Co.", addr: "2120 S. Michigan Ave.", num: "WAbash 2-3361", ico: "cabcheck" },
+    { name: "Checkerboard Club (billiards)", addr: "1504 S. Wabash Ave.", num: "WAbash 2-1161", ico: "board" },
+    { name: "Checkmate Chess Club", addr: "880 S. Wabash Ave.", num: "WAbash 2-2861", ico: "knight" },
+    { name: "Hale, Vincent J. (residence)", addr: "5480 S. Harper Ave.", num: "HYde Park 3-2210", ico: "house" },
+    { name: "Lakefront Cold Storage Co., Pier 9", addr: "1910 S. Lake Shore Dr.", num: "FRanklin 2-9090", ico: "snow" },
+    { name: "Savoy Ballroom", addr: "4733 S. Parkway", num: "KEnwood 6-1200", ico: "note" },
+    { name: "Velvet Room, The (nightclub)", addr: "3315 W. Madison St.", num: "DRexel 3-0505", ico: "note" },
+    { name: "Yellow Cab Co.", addr: "1702 S. Indiana Ave.", num: "WAbash 2-4461", ico: "cab" }
   ];
   const icons = {
     cab: `<svg viewBox="0 0 40 24"><rect x="2" y="9" width="36" height="10" rx="3" fill="#1c1e21"/><path d="M9 9l4-6h14l4 6z" fill="#1c1e21"/><circle cx="11" cy="20" r="3" fill="#f6f5f0" stroke="#1c1e21" stroke-width="2"/><circle cx="29" cy="20" r="3" fill="#f6f5f0" stroke="#1c1e21" stroke-width="2"/></svg>`,
@@ -310,7 +423,7 @@ window.LOCKLINE_ROOM = (() => {
       </article>`).join("")}</div>`);
       case "directory": return h(`<div>${doc(`<p class="doc-h">Chicago Classified Telephone Directory · 1952</p>
         <h3 class="doc-title">Page 214</h3>
-        <ul class="dir">${directory.map(d => `<li><span class="dir-ico" aria-hidden="true">${icons[d.ico]}</span><span class="dir-name">${d.name}</span><span class="dir-dots" aria-hidden="true"></span><span class="dir-num typed">${d.num}</span></li>`).join("")}</ul>
+        <ul class="dir">${directory.map(d => `<li><span class="dir-ico" aria-hidden="true">${icons[d.ico]}</span><span class="dir-name">${d.name}<span class="dir-addr">${d.addr}</span></span><span class="dir-dots" aria-hidden="true"></span><span class="dir-num typed">${d.num}</span></li>`).join("")}</ul>
         <p class="small muted">Exchanges are written as two letters + digits. "WAbash 2-7714" is dialed WA2-7714.</p>`, "doc--dir")}</div>`);
       case "telephone": {
         const box = h(`<div class="phone-desk">
@@ -341,7 +454,7 @@ window.LOCKLINE_ROOM = (() => {
     return `<div class="transcript doc"><p class="doc-h">Call · Checker Cab Co. · Night dispatch</p>
       <p>"Checker Cab. …The Blue Heron? Yeah, hold on. Here it is: <strong>Car 31</strong>, alley door of the Heron, <strong>1:52 AM</strong>.</p>
       <p>Driver says two fellas. One was out cold, and the other was holding him up, said his pal had one too many. <strong>Big fella, carrying a trumpet case.</strong></p>
-      <p>Fare went down to the lakefront: <strong>Pier 9, the cold-storage sheds</strong>. Big fella tipped in quarters, like he'd been playing for tips all night. That help you, officer?"</p></div>`;
+      <p>Fare went down to the lakefront: <strong>Lakefront Cold Storage, out on Pier 9</strong>. Big fella tipped in quarters, like he'd been playing for tips all night. That help you, officer?"</p></div>`;
   }
 
   function finalForm(ctx) {
@@ -372,30 +485,52 @@ window.LOCKLINE_ROOM = (() => {
   const hqState = { tab: "case" };
 
   function renderField(ctx, main) {
+    const st = ctx.state;
+    let area = areas.find(a => a.id === st.area && unlocked(ctx, a)) || areas[0];
+    const next = areas[areas.indexOf(area) + 1];
     const wrap = ctx.h(`<div class="field">
-      <div class="scene-head"><h1 class="view-h">Vince's office</h1><p class="muted">Select anything to take a closer look. Describe what you find to HQ.</p></div>
-      <div class="scene">${scene}<div class="hotspots"></div></div>
-      <h2 class="sub-h">Things to examine</h2>
+      <nav class="trail" aria-label="Places on the trail"><ol></ol></nav>
+      <div class="scene-head"><h1 class="view-h">${area.name}</h1><p class="muted">${area.where}. Select anything to take a closer look, and describe what you find to HQ.</p></div>
+      ${area.arrive && !area.spots.some(sp => ctx.seen(sp.id)) ? `<p class="arrive">${area.arrive}</p>` : ""}
+      <div class="scene">${area.scene}<div class="hotspots"></div></div>
+      <h2 class="sub-h">Things to search here</h2>
       <ul class="examine"></ul>
+      <div class="go-next"></div>
     </div>`);
+    const trail = wrap.querySelector(".trail ol");
+    areas.forEach((a, i) => {
+      const open = unlocked(ctx, a), here = a === area;
+      const b = ctx.h(`<li><button type="button" class="stop${here ? " here" : ""}${open ? "" : " locked"}" ${here ? 'aria-current="step"' : ""} ${open ? "" : 'aria-disabled="true"'}><span class="stop-n">${open ? i + 1 : "🔒"}</span><span class="stop-name">${open ? a.name : "Locked"}</span></button></li>`);
+      b.querySelector("button").addEventListener("click", () => {
+        if (!open) { ctx.toast("Find the way in from the place before it."); return; }
+        st.area = a.id; ctx.save(); ctx.rerender(); window.scrollTo(0, 0);
+      });
+      trail.append(b);
+    });
+
     const hs = wrap.querySelector(".hotspots"), list = wrap.querySelector(".examine");
-    for (const s of spots) {
-      const label = s.id === "drawer" && ctx.solved("drawer") ? "Open drawer" : s.id === "cigar" && ctx.solved("cigar") ? "Open cigar box" : s.label;
+    for (const s of area.spots) {
+      const label = s.lock && ctx.solved(s.lock) ? openLabel[s.lock] : s.label;
       const seen = ctx.seen(s.id) ? " seen" : "";
       const btn = ctx.h(`<button class="hs${seen}" style="left:${s.x}%;top:${s.y}%" aria-label="${label}"><span class="hs-tip">${label}</span></button>`);
-      const li = ctx.h(`<li><button class="ex-btn${seen}">${label}${seen ? '<span class="sr-only"> (seen)</span>' : ""}</button></li>`);
+      const li = ctx.h(`<li><button class="ex-btn${seen}${s.lock && !ctx.solved(s.lock) ? " has-lock" : ""}">${label}${s.lock && !ctx.solved(s.lock) ? ' <span aria-label="(locked)">🔒</span>' : ""}${seen ? '<span class="sr-only"> (seen)</span>' : ""}</button></li>`);
       const go = () => openSpot(ctx, s.id);
       btn.addEventListener("click", go);
       li.querySelector("button").addEventListener("click", go);
       hs.append(btn);
       list.append(li);
     }
+
+    if (next && unlocked(ctx, next)) {
+      const b = ctx.h(`<button class="btn btn--tape" type="button">Go to ${next.name} <span class="arrow" aria-hidden="true">→</span></button>`);
+      b.addEventListener("click", () => { st.area = next.id; ctx.save(); ctx.rerender(); window.scrollTo(0, 0); });
+      wrap.querySelector(".go-next").append(b);
+    }
     main.append(wrap);
   }
   function openSpot(ctx, id) {
     const [title, content, opts] = fieldItemArgs(ctx, id);
     const node = typeof content === "string" ? ctx.h(content) : content;
-    node.querySelectorAll?.("[data-goto]").forEach(b => b.addEventListener("click", () => openSpot(ctx, b.dataset.goto)));
     ctx.open(title, node, Object.assign({}, opts, { onClose: () => ctx.rerender() }));
   }
 
@@ -444,34 +579,40 @@ window.LOCKLINE_ROOM = (() => {
   // ---------- leads (case board) ----------
   const finalHints = [
     "The office clock stopped at 1:40, when the struggle happened. Check every suspect's alibi against that time. Field has the clock; HQ has the alibis.",
-    "Ruby and Leo both have witnesses at 1:40, and the cab driver saw two men. Field found something torn off at the scene. Does it match any booking record? For the unit: compare the claim check's date and terms with the harbor log, and look for a nickname in Vince's note.",
+    "Ruby and Leo both have witnesses at 1:40, and the cab driver saw a big man. Field found a cufflink on the stairs. Does it match any booking record? For the unit: compare the claim check's date and terms with the harbor log, and look for a nickname in Vince's note.",
     "The note-shaped cufflink matches Eddie Marsh's booking record, he carries a trumpet case, and he owes Vince $4,000. \"T. Tone\" is \"Two-Tone\": Eddie Marsh, Pier 9, unit 12."
   ];
 
   function leads(ctx) {
     const s = ctx.solved;
     if (ctx.role === "field") return [
-      { id: "help-hq", title: "HQ can't open their files", note: "They need something from this room.", status: ctx.done("help-hq") ? "done" : "open", manual: true,
-        hints: ["HQ's files are pulled by the club's street number. Something in this office shows the address.", "Businesses that sell liquor have to hang their license in plain view.", "The liquor license reads 4719 S. State St. Tell HQ: 4719."] },
-      { id: "drawer", title: "Locked desk drawer", note: "4-digit padlock", status: s("drawer") ? "done" : "open",
+      { id: "help-hq", title: "HQ can't open their files", note: "They need something from the office.", status: ctx.done("help-hq") ? "done" : "open", manual: true,
+        hints: ["HQ's files are pulled by the club's street number. Something in the office shows the address.", "Businesses that sell liquor have to hang their license in plain view.", "The liquor license reads 4719 S. State St. Tell HQ: 4719."] },
+      { id: "drawer", title: "Office: the locked drawer", note: "Opens the way downstairs", status: s("drawer") ? "done" : "open",
         hints: ["Vince's note mentions \"our songbird.\" HQ has the club's staff records.", "The songbird is the club's featured singer. Ask HQ when she first performed at the Heron.", "Ruby Lane, \"the Songbird of State Street,\" started 09/27/1948. Month and day: 0927."] },
-      { id: "cigar", title: "Cigar box on the shelf", note: "8-letter lock", status: s("cigar") ? "done" : "open",
-        hints: [s("drawer") ? "The ledger page from the drawer is in code. HQ's victim profile explains how Vince wrote it." : "Open the desk drawer first. What's inside will get you into this box.", "Vince pushed every letter forward by his old ship's number. Ask HQ for the ship (it's in the victim profile).", "The USS Garrison was DE-7. Move every letter back 7 (H→A, I→B…). The last line reads BOX WORD: MOONGLOW."] },
-      { id: "final", title: "Call it in", note: s("cigar") ? "Who took Vince, and where is he?" : "Find out who and where.", status: s("cigar") ? "open" : "locked", hints: s("cigar") ? finalHints : null }
+      { id: "cigar", title: "Club floor: the cigar box", note: "Opens the way to the alley", status: !s("drawer") ? "locked" : s("cigar") ? "done" : "open",
+        hints: s("drawer") ? ["The ledger page from the drawer is in code. HQ's victim profile explains how Vince wrote it.", "Vince pushed every letter forward by his old ship's number. Ask HQ for the ship (it's in the victim profile).", "The USS Garrison was DE-7. Move every letter back 7 (H→A, I→B…). The last line reads BOX WORD: MOONGLOW."] : null },
+      { id: "callbox", title: "Alley: send for a car", note: "Opens the way to Pier 9", status: !s("cigar") ? "locked" : s("callbox") ? "done" : "open",
+        hints: s("cigar") ? ["A cab picked someone up at the stage door. HQ has a telephone and the city directory. Is there a phone number out here?", "Read HQ the matchbook from the puddle: the checkered stripe, \"…b Co.\" and the number ending in 61. Once they know where the cab went, they can look up the address.", "The cab went to Lakefront Cold Storage, Pier 9, at 1910 S. Lake Shore Dr. Enter 1910."] : null },
+      { id: "final", title: "Pier 9: call it in", note: s("callbox") ? "Who took Vince, and which unit is he in?" : "Find out who and where.", status: s("callbox") ? "open" : "locked", hints: s("callbox") ? finalHints : null }
     ];
     return [
       { id: "records", title: "Get into the records", note: "Needs the club's street number", status: s("records") ? "done" : "open",
         hints: ["The Field team is standing in the club. Ask them to look for anything showing the address.", "Businesses that sell liquor have to hang their license on the wall.", "The license says 4719 S. State St. Enter 4719."] },
       { id: "songbird", title: "Field needs a date", note: "They'll ask about the club's staff.", status: s("records") ? (ctx.done("songbird") ? "done" : "open") : "locked", manual: true,
         hints: ["Field found a note about \"our songbird.\" Check the club staff file.", "The songbird is the featured singer. Her first night is what Field needs.", "Ruby Lane started 09/27/1948. Tell Field: 0927."] },
+      { id: "ship", title: "Field needs a code key", note: "They'll find a page in Vince's code.", status: s("records") ? (ctx.done("ship") ? "done" : "open") : "locked", manual: true,
+        hints: ["Mae Hale's statement in the case file explains Vince's code.", "Every letter was pushed forward by the number of his old ship. The victim profile names the ship.", "USS Garrison, DE-7. Tell Field: shift every letter back 7."] },
       { id: "phone", title: "Who drove Vince away?", note: "Use the telephone", status: !s("records") ? "locked" : s("phone") ? "done" : "open",
-        hints: ["You can call any number in the city directory. Ask Field whether they've found anything with a phone number on it.", "Field's matchbook has a burned number ending in 61, a checkered stripe, and the end of a name: \"…b Co.\"", "Only Checker Cab Co. matches all three. Dial WA2-3361."] },
-      { id: "final", title: "Call it in", note: s("phone") ? "Who took Vince, and where is he?" : "Find out who and where.", status: s("phone") ? "open" : "locked", hints: s("phone") ? finalHints : null }
+        hints: ["You can call any number in the city directory. Field will find a phone number once they reach the alley.", "Field's matchbook has a burned number ending in 61, a checkered stripe, and the end of a name: \"…b Co.\"", "Only Checker Cab Co. matches all three. Dial WA2-3361."] },
+      { id: "address", title: "Field needs an address", note: "Where did the cab go?", status: s("phone") ? (ctx.done("address") ? "done" : "open") : "locked", manual: true,
+        hints: ["The cab dispatcher told you where the fare went. Find that place in the city directory.", "Lakefront Cold Storage Co. is listed with its street address.", "1910 S. Lake Shore Dr. Tell Field: 1910."] },
+      { id: "final", title: "Call it in", note: s("phone") ? "Who took Vince, and which unit is he in?" : "Find out who and where.", status: s("phone") ? "open" : "locked", hints: s("phone") ? finalHints : null }
     ];
   }
 
   function boardExtra(ctx, el) {
-    if (ctx.role === "field" && ctx.solved("cigar")) {
+    if (ctx.role === "field" && ctx.solved("callbox")) {
       const b = ctx.h(`<button class="btn btn--tape board-cta">Call it in <span class="arrow" aria-hidden="true">→</span></button>`);
       b.addEventListener("click", () => ctx.open("Call it in", finalForm(ctx)));
       el.append(b);
@@ -484,25 +625,26 @@ window.LOCKLINE_ROOM = (() => {
     field: `<h1 class="screen-h">The Last Call</h1>
       <p class="typed brief-dateline">Chicago · Friday, October 3, 1952 · 5:52 AM</p>
       <p>You're standing in <strong>Vincent Hale's office</strong>, upstairs at the Blue Heron. Uniforms have taped off the room, and nobody's touched a thing.</p>
-      <p>Hale vanished after closing. His safe is open and his office is wrecked. If he's still alive, he won't be for long. <strong>Sunrise is at 6:52.</strong></p>
-      <p>HQ is on the line with the precinct files, but they can't see this room. Search everything and describe what you find. Some of these locks can only be opened with what HQ knows.</p>`,
+      <p>Hale vanished after closing. If he's still alive, he won't be for long. <strong>Sunrise is at 6:52.</strong></p>
+      <p>Follow the trail. Each place has a few things to search and one lock that gets you to the next: from the office, down to the club, out the back and on to wherever they took him. HQ has the precinct files but can't see what you see, so describe everything.</p>`,
     hq: `<h1 class="screen-h">The Last Call</h1>
       <p class="typed brief-dateline">Chicago · Friday, October 3, 1952 · 5:52 AM</p>
       <p>You're at the <strong>records desk</strong> of the 2nd District precinct. Vincent Hale, owner of the Blue Heron jazz club, has gone missing, and the Field team is at the scene.</p>
-      <p>You have the files: staff, suspects, the city directory and a telephone. Field has the evidence. Neither of you can crack this alone. <strong>Sunrise is at 6:52.</strong></p>
+      <p>They'll follow the trail from his office to wherever he was taken, and almost every lock they hit needs something from your files: staff, suspects, the city directory and a telephone. <strong>Sunrise is at 6:52.</strong></p>
       <p>First problem: the clerk won't pull any files without the club's street number. Ask Field to find it.</p>`
   };
   const howTo = `<div><ul class="howto">
     <li><strong>Talk constantly.</strong> Field sees the scene; HQ sees the records. Most locks on one screen are solved by information on the other.</li>
+    <li><strong>Field follows a trail</strong> of four places. Search everything in a place, then open its lock to reach the next one. You can go back to earlier places from the trail at the top.</li>
     <li><strong>The case board</strong> lists your open leads. Each has three hints; the last one gives the answer.</li>
     <li><strong>The notebook</strong> (top bar) saves anything you jot down on this device.</li>
-    <li><strong>Call it in</strong> when you know who did it and where Vince is. Wrong calls cost 3 minutes.</li>
+    <li><strong>Call it in</strong> when you know who did it and which unit Vince is in. Wrong calls cost 3 minutes.</li>
     <li>Your progress saves automatically. Close the tab and come back any time.</li>
   </ul></div>`;
   const ending = () => `<h1 class="screen-h">Found him.</h1>
     <p>Squad cars hit Pier 9 at 6:41. Behind the door of <strong>Unit 12</strong>, wrapped in a moving blanket and shivering hard, Vincent Hale was alive.</p>
     <p>His ledger was on a crate beside him. So was <strong>Eddie "Two-Tone" Marsh</strong>, trying to burn it with a lighter that wouldn't catch in the cold. He'd planned to leave Vince there until the book was ash, then let the cold do the rest.</p>
-    <p>Eddie was booked at 7:15, minus one cufflink. Vince was back behind the bar by Saturday night. The band played <em>Moonglow</em>.</p>`;
+    <p>Eddie was booked at 7:15, minus one cufflink and his camel overcoat. Vince was back behind the bar by Saturday night. The band played <em>Moonglow</em>.</p>`;
   const rank = (sec, hints) => {
     const m = sec / 60;
     if (m <= 35 && hints <= 1) return "Chief of Detectives";
