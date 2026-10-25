@@ -84,12 +84,6 @@ p { margin: 0 0 1em; }
 .nav .btn { min-height: 42px; padding: 0 18px; font-size: .95rem; }
 @media (max-width: 760px) { .nav ul { display: none; } }
 
-/* ---------- tape strip ---------- */
-.tape-strip { background: var(--tape); border-block: 2px solid var(--char); overflow: hidden; white-space: nowrap; font: 700 .9rem/1 var(--f-type); text-transform: uppercase; letter-spacing: .12em; padding: 13px 0; }
-.tape-strip span { display: inline-block; padding-right: 2.5em; }
-.tape-strip .track { display: inline-block; animation: tape 38s linear infinite; }
-@keyframes tape { to { transform: translateX(-50%); } }
-
 /* ---------- sections ---------- */
 section { padding: clamp(64px, 9vw, 120px) 0; }
 .section-head { max-width: 680px; margin-bottom: 44px; }
