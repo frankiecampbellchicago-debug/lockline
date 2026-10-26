@@ -6,9 +6,6 @@
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(90deg, #111e2bf2 0, #111e2bcc 30%, #111e2b00 58%);
 }
-.hero::after { /* thin inset frame line */
-  content: ""; position: absolute; inset: 14px; z-index: 2; border: 1px solid var(--night-line); pointer-events: none;
-}
 .hero .wrap { position: relative; z-index: 3; }
 .hero-copy { max-width: 620px; }
 .hero .eyebrow { color: var(--brass); }
