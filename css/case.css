@@ -33,10 +33,10 @@
 .poi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 @media (max-width: 960px) { .poi { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .poi { grid-template-columns: 1fr; } }
-.poi-card { border-top: 1px solid var(--brass); padding-top: 22px; }
-.poi-tag { font: 500 .68rem/1 var(--f-body); color: var(--brass); text-transform: uppercase; letter-spacing: .28em; }
+.poi-card { border-top: 1px solid var(--brass-ink); padding-top: 22px; }
+.poi-tag { font: 500 .68rem/1 var(--f-body); color: var(--brass-ink); text-transform: uppercase; letter-spacing: .28em; }
 .poi-card h3 { margin: 8px 0; }
-.poi-card p { font-size: .98rem; }
+.poi-card p { color: var(--ink-2); font-size: .98rem; }
 
 .need { display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px; align-items: start; }
 @media (max-width: 760px) { .need { grid-template-columns: 1fr; } }
