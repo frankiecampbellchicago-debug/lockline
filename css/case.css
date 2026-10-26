@@ -49,4 +49,22 @@
 .content-note { color: var(--mute); font-size: .92rem; margin-top: 20px; }
 
 .dark .lede { color: var(--night-muted); }
-.final-cta { background: var(--gray); }
+
+/* night versions of the case page cards */
+.dark .paper { background: transparent; border-color: var(--night-line); }
+.dark .role p, .dark .best { color: var(--night-muted); }
+.dark .role-ico { background: transparent; border: 1px solid var(--night-line); }
+.dark .role-ico svg * { stroke: var(--brass); }
+.dark .role .chip { border-color: var(--night-line); color: var(--brass); }
+.dark .need-list li { background: transparent; border-color: var(--night-line); color: var(--night-muted); }
+.dark .need-list strong { color: var(--night-text); }
+.dark .content-note { color: var(--night-muted); }
+.dark .buy { color: var(--night-text); }
+.dark .buy p, .dark .buy li { color: var(--night-muted); }
+.dark .buy strong, .dark .buy-title { color: var(--night-text); }
+.dark .buy-note { background: #ffffff0d; color: var(--night-muted); }
+.dark .buy-list li::before { color: var(--brass); }
+.dark .buy-have { border-top-color: var(--night-line); }
+.dark .stamp--file { color: var(--brass); }
+.dark .buy-price span { color: var(--night-muted); }
+.buy-price strong { font: 700 3rem/1 var(--f-name); letter-spacing: 0; }

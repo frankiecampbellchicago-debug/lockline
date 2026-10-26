@@ -7,11 +7,11 @@
 <meta name="description" content="Online detective escape rooms you play from anywhere. Split into Field and HQ, each on your own screen, and talk it through. 2–6 players, $10 per room.">
 <meta property="og:title" content="Stakeout · Online escape rooms">
 <meta property="og:description" content="Multiple screens. One team. Crack the case. 2–6 players, $10 per room.">
-<meta name="theme-color" content="#f2f1ec">
+<meta name="theme-color" content="#111e2b">
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Courier+Prime:wght@400;700&family=Inter:wght@300..700&family=Playfair+Display:wght@700&display=swap">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/home.css">
 </head>
@@ -37,24 +37,42 @@
 
 <main id="main">
   <section class="hero">
-    <img class="hero-img" src="images/hero.webp" srcset="images/hero-sm.webp 1000w, images/hero.webp 1672w" sizes="100vw" width="1672" height="941" alt="">
-    <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow">Online escape rooms · 2–6 players</span>
-        <h1 class="kinetic" aria-label="Multiple screens. One team. Crack the case.">
-          <span class="k" aria-hidden="true">Multiple screens.</span>
-          <span class="k" aria-hidden="true">One team.</span>
-          <span class="k" aria-hidden="true">Crack the <em>case</em>.</span>
-        </h1>
-        <div class="hero-cta">
-          <a class="btn btn--tape" href="rooms/the-last-call.html">Open Case 01 · $10 <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost" href="#how">How it works</a>
-        </div>
+    <!-- three panels, one per case; each slowly cycles through its pictures -->
+    <div class="triptych">
+      <a class="panel" href="rooms/the-last-call.html" style="--n:4;--lag:0s">
+        <img class="slide" style="--i:0;object-position:46% 50%" src="images/cases/last-call-office.svg" alt="" fetchpriority="high">
+        <img class="slide" style="--i:1;object-position:30% 50%" src="images/cases/last-call-floor.svg" alt="" loading="lazy">
+        <img class="slide" style="--i:2;object-position:22% 50%" src="images/cases/last-call-alley.svg" alt="" loading="lazy">
+        <img class="slide" style="--i:3;object-position:70% 50%" src="images/cases/last-call-pier.svg" alt="" loading="lazy">
+        <span class="panel-label"><span>Case 01</span>The Last Call</span>
+      </a>
+      <div class="panel soon" style="--n:3;--lag:-3s">
+        <img class="slide" style="--i:0;object-position:62% 30%" src="images/hero.webp" srcset="images/hero-sm.webp 1000w, images/hero.webp 1672w" sizes="34vw" alt="" fetchpriority="high">
+        <img class="slide" style="--i:1;object-position:92% 40%" src="images/hero.webp" srcset="images/hero-sm.webp 1000w, images/hero.webp 1672w" sizes="34vw" alt="" loading="lazy">
+        <img class="slide" style="--i:2;object-position:70% 85%" src="images/hero.webp" srcset="images/hero-sm.webp 1000w, images/hero.webp 1672w" sizes="34vw" alt="" loading="lazy">
+        <span class="panel-label"><span>Case 02</span>In the works</span>
+      </div>
+      <div class="panel soon" style="--n:3;--lag:-6s">
+        <img class="slide" style="--i:0;object-position:86% 62%" src="images/hero.webp" srcset="images/hero-sm.webp 1000w, images/hero.webp 1672w" sizes="34vw" alt="" loading="lazy">
+        <img class="slide" style="--i:1;object-position:55% 55%" src="images/hero.webp" srcset="images/hero-sm.webp 1000w, images/hero.webp 1672w" sizes="34vw" alt="" loading="lazy">
+        <img class="slide" style="--i:2;object-position:100% 75%" src="images/hero.webp" srcset="images/hero-sm.webp 1000w, images/hero.webp 1672w" sizes="34vw" alt="" loading="lazy">
+        <span class="panel-label"><span>Case 03</span>In the works</span>
+      </div>
+    </div>
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <span class="eyebrow">Online escape rooms · 2–6 players</span>
+      <h1 class="hero-name">Stakeout</h1>
+      <p class="hero-sub">Detective cases for multiple screens</p>
+      <p class="hero-line">Multiple screens. One team. Crack the <em>case</em>.</p>
+      <div class="hero-cta">
+        <a class="btn btn--tape" href="rooms/the-last-call.html">Open Case 01 · $10</a>
+        <a class="btn btn--ghost" href="#how">How it works</a>
       </div>
     </div>
   </section>
 
-  <section id="how">
+  <section id="how" class="dark">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">How it works</span>
@@ -62,17 +80,17 @@
         <p>Most online escape rooms put everyone in front of one shared screen. Stakeout gives each team its own screen, so you have to describe what you see. That's where the fun is.</p>
       </div>
       <ol class="steps">
-        <li class="step paper reveal">
+        <li class="step reveal">
           <span class="step-n typed">01</span>
           <h3>Get your key</h3>
           <p>Buy a case for $10. Your case key arrives by email in seconds, and one key covers your whole group.</p>
         </li>
-        <li class="step paper reveal">
+        <li class="step reveal">
           <span class="step-n typed">02</span>
           <h3>Pick a side</h3>
           <p>One team takes <strong>Field</strong> and works the crime scene. The other takes <strong>HQ</strong> and digs through precinct records. Each team opens <a href="play.html">stakeout/play</a> on its own device.</p>
         </li>
-        <li class="step paper reveal">
+        <li class="step reveal">
           <span class="step-n typed">03</span>
           <h3>Talk it through</h3>
           <p>Hop on any call: FaceTime, Zoom, Discord or a plain phone call. Read clues out loud, compare notes and name the culprit before dawn.</p>
@@ -102,7 +120,7 @@
     </div>
   </section>
 
-  <section class="duo dark">
+  <section class="duo dark dark--2">
     <div class="wrap duo-grid">
       <div class="reveal">
         <span class="eyebrow">Long distance</span>
@@ -119,7 +137,7 @@
     </div>
   </section>
 
-  <section id="faq">
+  <section id="faq" class="dark">
     <div class="wrap faq-wrap">
       <div class="section-head reveal">
         <span class="eyebrow">FAQ</span>

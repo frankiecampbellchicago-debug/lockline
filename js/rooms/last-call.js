@@ -656,6 +656,7 @@ window.LOCKLINE_ROOM = (() => {
   return {
     id: "last-call", title: "The Last Call", clockStart: [5, 52], dawnMinutes: 60,
     answers, briefing, howTo, leads, boardExtra, ending, rank,
+    art: { office: officeScene, floor: floorScene, alley: alleyScene, pier: pierScene },
     render(ctx, main) { ctx.role === "field" ? renderField(ctx, main) : renderHQ(ctx, main); }
   };
 })();
