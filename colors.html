@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pick colors · Stakeout</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Inter:wght@300..600&family=Playfair+Display:wght@700&display=swap">
+<style>
+  /* A one-off page for choosing Stakeout's color scheme. Each card is a mini version of the site:
+     menu bar, the dark photo top, a medium-tone section (between "too dark" and "too bright"), and the footer. */
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9e7e3; color: #1c1c1c; font: 300 16px/1.6 "Inter", system-ui, sans-serif; }
+  .wrap { width: min(1240px, 100% - 32px); margin: 0 auto; padding: 48px 0 72px; }
+  h1 { font: 500 clamp(2rem, 4vw, 3rem)/1.1 "Cormorant Garamond", serif; margin: 0 0 8px; }
+  .lead { margin: 0 0 36px; color: #4a4a4a; max-width: 60ch; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+  .opt { border: 1px solid #0002; background: #fff; }
+  .opt h2 { font: 600 .8rem/1 "Inter", sans-serif; letter-spacing: .24em; text-transform: uppercase; margin: 0; padding: 16px 18px 6px; }
+  .opt p.desc { margin: 0; padding: 0 18px 16px; font-size: .92rem; color: #555; }
+  .mini { --night: #000; --mid: #333; --mid2: #3a3a3a; --text: #fff; --muted: #ccc; --accent: #c90; --line: #fff2; }
+  .m-nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--night); border-bottom: 1px solid var(--line); }
+  .m-logo { font: 700 1rem/1 "Playfair Display", serif; color: var(--text); }
+  .m-links { font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); display: flex; gap: 12px; }
+  .m-btn { display: inline-block; padding: 7px 12px; font: 500 .55rem/1 "Inter", sans-serif; letter-spacing: .2em; text-transform: uppercase; background: var(--accent); color: var(--night); }
+  .m-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  .m-hero { position: relative; height: 190px; display: grid; place-items: center; text-align: center; overflow: hidden; background: var(--night); }
+  .m-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right 30%; opacity: .55; }
+  .m-hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 70% at 50% 50%, transparent, var(--night)); }
+  .m-hero > div { position: relative; z-index: 1; }
+  .m-eyebrow { font-size: .5rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+  .m-name { font: 700 2.2rem/1 "Playfair Display", serif; color: var(--text); margin: 4px 0 10px; }
+  .m-sec { padding: 22px 18px; background: var(--mid); color: var(--text); text-align: center; }
+  .m-sec.two { background: var(--mid2); }
+  .m-sec h3 { font: 500 1.5rem/1.1 "Cormorant Garamond", serif; margin: 6px 0 8px; }
+  .m-sec h3 em { font-style: italic; color: var(--accent); }
+  .m-sec p { margin: 0 auto 12px; font-size: .78rem; color: var(--muted); max-width: 34ch; }
+  .m-foot { padding: 10px 14px; background: var(--night); font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .sw { display: flex; }
+  .sw span { flex: 1; height: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Pick Stakeout's colors</h1>
+  <p class="lead">Each card is a small version of the site: the menu, the dark photo top, two medium-tone sections, and the footer. Tell Claude the number you like, or mix them ("2, but with the gold from 6").</p>
+  <div class="grid">
+
+    <article class="opt">
+      <div class="mini" style="--night:#0f2326;--mid:#2c4a4f;--mid2:#365a60;--text:#f1ede6;--muted:#c9d3d1;--accent:#d8946a;--line:#d8946a33">
+        <div class="m-nav"><span class="m-logo">stakeout</span><span class="m-links"><span>Case 01</span><span>FAQ</span></span><span class="m-btn">Play now</span></div>
+        <div class="m-hero"><img src="images/hero-sm.webp" alt=""><div><div class="m-eyebrow">Online escape rooms</div><div class="m-name">Stakeout</div><span class="m-btn">Open Case 01</span> <span class="m-btn m-ghost">How it works</span></div></div>
+        <div class="m-sec"><div class="m-eyebrow">How it works</div><h3>Same case. Different <em>evidence</em>.</h3><p>Each team gets its own screen, so you have to describe what you see.</p><span class="m-btn">Open Case 01</span></div>
+        <div class="m-sec two"><h3>Made for <em>two</em>.</h3><p>One of you at the scene, one at the precinct.</p></div>
+        <div class="m-foot">© Stakeout</div>
+      </div>
+      <div class="sw"><span style="background:#0f2326"></span><span style="background:#2c4a4f"></span><span style="background:#365a60"></span><span style="background:#d8946a"></span><span style="background:#f1ede6"></span></div>
+      <h2>1 · Deep teal &amp; copper</h2>
+      <p class="desc">Ocean-dark teal with warm copper. Moody, like the lakefront at Pier 9.</p>
+    </article>
+
+    <article class="opt">
+      <div class="mini" style="--night:#1b2024;--mid:#46515a;--mid2:#525e68;--text:#f2efe9;--muted:#d0d5d9;--accent:#d9bb7e;--line:#d9bb7e33">
+        <div class="m-nav"><span class="m-logo">stakeout</span><span class="m-links"><span>Case 01</span><span>FAQ</span></span><span class="m-btn">Play now</span></div>
+        <div class="m-hero"><img src="images/hero-sm.webp" alt=""><div><div class="m-eyebrow">Online escape rooms</div><div class="m-name">Stakeout</div><span class="m-btn">Open Case 01</span> <span class="m-btn m-ghost">How it works</span></div></div>
+        <div class="m-sec"><div class="m-eyebrow">How it works</div><h3>Same case. Different <em>evidence</em>.</h3><p>Each team gets its own screen, so you have to describe what you see.</p><span class="m-btn">Open Case 01</span></div>
+        <div class="m-sec two"><h3>Made for <em>two</em>.</h3><p>One of you at the scene, one at the precinct.</p></div>
+        <div class="m-foot">© Stakeout</div>
+      </div>
+      <div class="sw"><span style="background:#1b2024"></span><span style="background:#46515a"></span><span style="background:#525e68"></span><span style="background:#d9bb7e"></span><span style="background:#f2efe9"></span></div>
+      <h2>2 · Slate &amp; brass</h2>
+      <p class="desc">Cool slate gray with soft brass. Calm and serious, like a police file room.</p>
+    </article>
+
+    <article class="opt">
+      <div class="mini" style="--night:#1a1e15;--mid:#4a523f;--mid2:#56604a;--text:#f2efe4;--muted:#d4d8c8;--accent:#e2b65f;--line:#e2b65f33">
+        <div class="m-nav"><span class="m-logo">stakeout</span><span class="m-links"><span>Case 01</span><span>FAQ</span></span><span class="m-btn">Play now</span></div>
+        <div class="m-hero"><img src="images/hero-sm.webp" alt=""><div><div class="m-eyebrow">Online escape rooms</div><div class="m-name">Stakeout</div><span class="m-btn">Open Case 01</span> <span class="m-btn m-ghost">How it works</span></div></div>
+        <div class="m-sec"><div class="m-eyebrow">How it works</div><h3>Same case. Different <em>evidence</em>.</h3><p>Each team gets its own screen, so you have to describe what you see.</p><span class="m-btn">Open Case 01</span></div>
+        <div class="m-sec two"><h3>Made for <em>two</em>.</h3><p>One of you at the scene, one at the precinct.</p></div>
+        <div class="m-foot">© Stakeout</div>
+      </div>
+      <div class="sw"><span style="background:#1a1e15"></span><span style="background:#4a523f"></span><span style="background:#56604a"></span><span style="background:#e2b65f"></span><span style="background:#f2efe4"></span></div>
+      <h2>3 · Moss &amp; amber</h2>
+      <p class="desc">Olive green with amber lamplight. Earthy, like an old library desk lamp.</p>
+    </article>
+
+    <article class="opt">
+      <div class="mini" style="--night:#24101a;--mid:#572c38;--mid2:#653644;--text:#f6ece6;--muted:#e2c9cb;--accent:#e8b98f;--line:#e8b98f33">
+        <div class="m-nav"><span class="m-logo">stakeout</span><span class="m-links"><span>Case 01</span><span>FAQ</span></span><span class="m-btn">Play now</span></div>
+        <div class="m-hero"><img src="images/hero-sm.webp" alt=""><div><div class="m-eyebrow">Online escape rooms</div><div class="m-name">Stakeout</div><span class="m-btn">Open Case 01</span> <span class="m-btn m-ghost">How it works</span></div></div>
+        <div class="m-sec"><div class="m-eyebrow">How it works</div><h3>Same case. Different <em>evidence</em>.</h3><p>Each team gets its own screen, so you have to describe what you see.</p><span class="m-btn">Open Case 01</span></div>
+        <div class="m-sec two"><h3>Made for <em>two</em>.</h3><p>One of you at the scene, one at the precinct.</p></div>
+        <div class="m-foot">© Stakeout</div>
+      </div>
+      <div class="sw"><span style="background:#24101a"></span><span style="background:#572c38"></span><span style="background:#653644"></span><span style="background:#e8b98f"></span><span style="background:#f6ece6"></span></div>
+      <h2>4 · Wine &amp; peach</h2>
+      <p class="desc">Red-wine tones with soft peach. Rich and romantic, like a jazz club's velvet booth.</p>
+    </article>
+
+    <article class="opt">
+      <div class="mini" style="--night:#18181a;--mid:#38383d;--mid2:#434349;--text:#f1eee9;--muted:#cfcbc5;--accent:#e58b4c;--line:#e58b4c33">
+        <div class="m-nav"><span class="m-logo">stakeout</span><span class="m-links"><span>Case 01</span><span>FAQ</span></span><span class="m-btn">Play now</span></div>
+        <div class="m-hero"><img src="images/hero-sm.webp" alt=""><div><div class="m-eyebrow">Online escape rooms</div><div class="m-name">Stakeout</div><span class="m-btn">Open Case 01</span> <span class="m-btn m-ghost">How it works</span></div></div>
+        <div class="m-sec"><div class="m-eyebrow">How it works</div><h3>Same case. Different <em>evidence</em>.</h3><p>Each team gets its own screen, so you have to describe what you see.</p><span class="m-btn">Open Case 01</span></div>
+        <div class="m-sec two"><h3>Made for <em>two</em>.</h3><p>One of you at the scene, one at the precinct.</p></div>
+        <div class="m-foot">© Stakeout</div>
+      </div>
+      <div class="sw"><span style="background:#18181a"></span><span style="background:#38383d"></span><span style="background:#434349"></span><span style="background:#e58b4c"></span><span style="background:#f1eee9"></span></div>
+      <h2>5 · Smoke &amp; ember</h2>
+      <p class="desc">Smoky charcoal with an ember-orange glow. Closest to Salt's orange buttons.</p>
+    </article>
+
+    <article class="opt">
+      <div class="mini" style="--night:#131a2e;--mid:#2f3b5c;--mid2:#3a4769;--text:#f2efe8;--muted:#cdd3e2;--accent:#e6c47c;--line:#e6c47c33">
+        <div class="m-nav"><span class="m-logo">stakeout</span><span class="m-links"><span>Case 01</span><span>FAQ</span></span><span class="m-btn">Play now</span></div>
+        <div class="m-hero"><img src="images/hero-sm.webp" alt=""><div><div class="m-eyebrow">Online escape rooms</div><div class="m-name">Stakeout</div><span class="m-btn">Open Case 01</span> <span class="m-btn m-ghost">How it works</span></div></div>
+        <div class="m-sec"><div class="m-eyebrow">How it works</div><h3>Same case. Different <em>evidence</em>.</h3><p>Each team gets its own screen, so you have to describe what you see.</p><span class="m-btn">Open Case 01</span></div>
+        <div class="m-sec two"><h3>Made for <em>two</em>.</h3><p>One of you at the scene, one at the precinct.</p></div>
+        <div class="m-foot">© Stakeout</div>
+      </div>
+      <div class="sw"><span style="background:#131a2e"></span><span style="background:#2f3b5c"></span><span style="background:#3a4769"></span><span style="background:#e6c47c"></span><span style="background:#f2efe8"></span></div>
+      <h2>6 · Dusk blue &amp; gold</h2>
+      <p class="desc">Evening blue with warm gold. Classic detective noir, like a city at night.</p>
+    </article>
+
+  </div>
+</div>
+</body>
+</html>
