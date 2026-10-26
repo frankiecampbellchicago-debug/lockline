@@ -3,7 +3,7 @@
    under a dark veil, with the name centered on top. */
 .hero { position: relative; overflow: hidden; background: var(--night); color: var(--night-text); padding: 0; height: calc(100svh - 68px); min-height: 560px; display: grid; place-items: center; text-align: center; }
 .triptych { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
-.panel { position: relative; overflow: hidden; display: block; color: inherit; text-decoration: none; background: #0c1621; }
+.panel { position: relative; overflow: hidden; display: block; color: inherit; text-decoration: none; background: var(--night-2); }
 .panel + .panel { border-left: 1px solid var(--night-line); }
 .slide { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; opacity: 0;
   animation: slide calc(var(--n) * 6s) linear infinite; animation-delay: calc(var(--i) * 6s + var(--lag)); }
@@ -22,11 +22,11 @@
 a.panel:hover .panel-label { color: var(--brass); }
 a.panel:hover .slide { filter: brightness(1.12); }
 .hero-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(75% 60% at 50% 46%, #111e2b38, #111e2bc4 78%), linear-gradient(#111e2b66, #111e2b33 40%, #111e2bcc); }
+  background: radial-gradient(75% 60% at 50% 46%, color-mix(in srgb, var(--night) 22%, transparent), color-mix(in srgb, var(--night) 77%, transparent) 78%), linear-gradient(color-mix(in srgb, var(--night) 40%, transparent), color-mix(in srgb, var(--night) 20%, transparent) 40%, color-mix(in srgb, var(--night) 80%, transparent)); }
 .hero-copy { position: relative; z-index: 2; max-width: 640px; padding: 0 24px; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
 .hero-copy a { pointer-events: auto; }
 .hero .eyebrow { color: var(--brass); }
-.hero-name { font: 700 clamp(3.6rem, 9vw, 7rem)/1 var(--f-name); letter-spacing: .01em; margin: 0 0 14px; color: #f3ecdf; }
+.hero-name { font: 700 clamp(3.6rem, 9vw, 7rem)/1 var(--f-name); letter-spacing: .01em; margin: 0 0 14px; color: var(--night-text); }
 .hero-sub { font: 400 .68rem/1 var(--f-body); letter-spacing: .38em; text-transform: uppercase; color: var(--brass); margin: 0 0 26px; }
 .hero-line { font: 400 clamp(1.3rem, 2.2vw, 1.7rem)/1.4 var(--f-head); color: var(--night-text); margin: 0 0 34px; }
 .hero-line em { font-style: italic; color: var(--brass); }

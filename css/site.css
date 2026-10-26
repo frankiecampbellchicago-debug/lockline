@@ -1,28 +1,29 @@
 /* Stakeout — shared styles
-   Palette: taken from the homepage photo (navy table, brass lock, paper cards). Light pages, navy ink.
-   --tape is a paper fill behind navy text; --brand is the main button with white text; --brass only on navy,
-   --brass-ink for brass-colored text on cream.
-   Look: the high-end restaurant-site feel F&L Studio uses (Salt, Bel Piatto, Costa do Sol): night sections
-   alternating with cream ones, square buttons with spaced capitals, hairline labels, one accent word per heading. */
+   Three color options to choose from, picked with ?colors=a|b|c (remembered on this device):
+   a · Whiskey & smoke (Figma "Chocolate truffle"), b · Oxblood & gold, c · Graphite & ember.
+   Each has a dark night color, a light paper color for the game screens, and one warm accent:
+   --brass is the accent on night sections, --brass-ink the darker accent for text on paper.
+   Look: Salt-style night sections, square spaced-caps buttons, hairline labels, one italic accent word per heading. */
 :root {
-  --ivory: #f2f1ec;
-  --gray: #e6e3da;
-  --gray-2: #cfcabd;
-  --char: #111e2b;
-  --ink-2: #3a4656;
-  --mute: #586374;
-  --tape: #e6dcc3;
-  --tape-deep: #d3bb8b;
-  --brand: #1b2b40;
-  --night: #111e2b;
-  --brass: #d3bb8b;
-  --brass-ink: #7a5f2e;
-  --night-text: #eef0f2;
-  --night-muted: #b3bccb;
-  --night-line: #d3bb8b2e;
+  --ivory: #f5efe6;
+  --gray: #ebe2d4;
+  --gray-2: #d6c9b5;
+  --char: #1f1510;
+  --ink-2: #4d3d31;
+  --mute: #6a5848;
+  --tape: #ecdcc3;
+  --tape-deep: #cf9a5e;
+  --brand: #3a2417;
+  --night: #18110c;
+  --night-2: #100b07;
+  --brass: #cf9a5e;
+  --brass-ink: #8a5626;
+  --night-text: #f2e8d9;
+  --night-muted: #c4b39c;
+  --night-line: color-mix(in srgb, #cf9a5e 18%, transparent);
   --err: #b3261e;
   --ok: #2e6b3f;
-  --line: #111e2b22;
+  --line: color-mix(in srgb, var(--char) 13%, transparent);
 
   --f-head: "Cormorant Garamond", Georgia, serif;
   --f-name: "Playfair Display", Georgia, serif;
@@ -31,9 +32,46 @@
 
   --r: 0px;
   --r-sm: 0px;
-  --shadow: 0 1px 0 #111e2b10, 0 10px 30px -12px #111e2b40;
+  --shadow: 0 1px 0 color-mix(in srgb, var(--char) 6%, transparent), 0 10px 30px -12px color-mix(in srgb, var(--char) 25%, transparent);
   --wrap: 1160px;
   --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+:root[data-palette="b"] {
+  --ivory: #f6f1ee;
+  --gray: #ece3df;
+  --gray-2: #d8c8c2;
+  --char: #241014;
+  --ink-2: #4f363a;
+  --mute: #6b5156;
+  --tape: #eedfd6;
+  --tape-deep: #d4b06a;
+  --brand: #5a1a22;
+  --night: #1a0c0f;
+  --night-2: #110709;
+  --brass: #d4b06a;
+  --brass-ink: #7f5f22;
+  --night-text: #f3e9e4;
+  --night-muted: #c9b1ab;
+  --night-line: color-mix(in srgb, #d4b06a 18%, transparent);
+}
+:root[data-palette="c"] {
+  --ivory: #f4f2ef;
+  --gray: #e7e4df;
+  --gray-2: #d1ccc5;
+  --char: #1a1a1a;
+  --ink-2: #45413c;
+  --mute: #625d57;
+  --tape: #efe2d4;
+  --tape-deep: #e0884a;
+  --brand: #262321;
+  --night: #141414;
+  --night-2: #0c0c0c;
+  --brass: #e0884a;
+  --brass-ink: #9a4a17;
+  --night-text: #efebe6;
+  --night-muted: #b8b1a9;
+  --night-line: color-mix(in srgb, #e0884a 18%, transparent);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -80,7 +118,7 @@ p { margin: 0 0 1em; }
 .btn:active { transform: scale(.98); }
 .btn--tape { --bg: var(--brand); --bd: var(--brand); --fg: #fff; }
 .btn--tape:hover { --bg: transparent; --fg: var(--brand); }
-.btn--ghost { --bg: transparent; --fg: var(--char); --bd: #111e2b59; }
+.btn--ghost { --bg: transparent; --fg: var(--char); --bd: color-mix(in srgb, var(--char) 35%, transparent); }
 .btn--ghost:hover { --bg: var(--char); --fg: var(--ivory); --bd: var(--char); }
 .dark .btn--tape, .hero .btn--tape, .nav .btn--tape { --bg: var(--brass); --bd: var(--brass); --fg: var(--night); }
 .dark .btn--tape:hover, .hero .btn--tape:hover, .nav .btn--tape:hover { --bg: transparent; --fg: var(--brass); }
@@ -98,12 +136,12 @@ p { margin: 0 0 1em; }
 .dark .eyebrow, .hero .eyebrow { color: var(--brass); }
 
 /* ---------- nav ---------- */
-.nav { position: sticky; top: 0; z-index: 50; background: #111e2bf2; backdrop-filter: blur(10px); border-bottom: 1px solid var(--night-line); color: var(--night-text); }
+.nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--night) 95%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--night-line); color: var(--night-text); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 68px; gap: 16px; }
 .logo { display: inline-flex; align-items: center; gap: 10px; font: 700 1.35rem/1 var(--f-name); letter-spacing: .01em; text-decoration: none; }
 .logo svg { width: 30px; height: 30px; }
-.nav .logo svg rect { fill: #e6dcc3; }
-.nav .logo svg circle, .nav .logo svg path { fill: #111e2b; }
+.nav .logo svg rect, footer .logo svg rect { fill: var(--tape); }
+.nav .logo svg circle, .nav .logo svg path, footer .logo svg circle, footer .logo svg path { fill: var(--night); }
 .nav ul { display: flex; gap: 32px; list-style: none; margin: 0 0 0 auto; padding: 0; }
 .nav ul a { text-decoration: none; font: 400 .72rem/1 var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--night-muted); transition: color .2s; }
 .nav ul a:hover, .nav ul a[aria-current] { color: var(--brass); }
@@ -117,7 +155,7 @@ section { padding: clamp(64px, 9vw, 120px) 0; }
 .alt { background: var(--gray); }
 /* night sections */
 .dark { background: var(--night); color: var(--night-text); }
-.dark--2 { background: #0c1621; }
+.dark--2 { background: var(--night-2); }
 .dark p, .dark li { color: var(--night-muted); }
 .dark strong { color: var(--night-text); }
 .dark .section-head p { color: var(--night-muted); }
@@ -127,7 +165,7 @@ footer { background: var(--night); color: var(--gray); padding: 64px 0 44px; bor
 footer a { color: var(--ivory); }
 footer .wrap { display: grid; gap: 28px; grid-template-columns: 2fr 1fr 1fr; }
 footer .logo { color: var(--ivory); }
-footer small { color: #b3bccb; display: block; margin-top: 12px; }
+footer small { color: var(--night-muted); display: block; margin-top: 12px; }
 footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 footer h4 { font: 500 .7rem/1 var(--f-body); letter-spacing: .28em; text-transform: uppercase; color: var(--brass); margin-bottom: 16px; }
 @media (max-width: 760px) { footer .wrap { grid-template-columns: 1fr; } }
